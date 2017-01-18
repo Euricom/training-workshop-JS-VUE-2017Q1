@@ -1,0 +1,23 @@
+{
+    "name": "node-app",
+    "version": "1.0.0",
+    "description": "ES.Next Node Template",
+    "scripts": {
+        "build": "babel . -d ./build --ignore node_modules",
+        "start": "nodemon main.js --exec babel-node"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {},
+    "devDependencies": {
+        "babel-cli": "^6.18.0",
+        "babel-core": "^6.21.0",
+        "babel-preset-es2017-node7": "^0.4.1",
+        "babel-preset-latest": "^6.16.0",
+        "babel-preset-stage-2": "^6.18.0",
+        "eslint": "^3.13.1",
+        "eslint-config-standard": "^6.2.1",
+        "eslint-plugin-promise": "^3.4.0",
+        "eslint-plugin-standard": "^2.0.1"
+    }
+}

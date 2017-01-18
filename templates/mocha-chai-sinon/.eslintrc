@@ -1,0 +1,9 @@
+{
+    "extends": "standard",
+    "globals": {
+        "sinon": true
+    },
+    "rules": {
+        "indent": [2, 4]
+    }
+}
