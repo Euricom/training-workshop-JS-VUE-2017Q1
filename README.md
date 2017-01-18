@@ -20,9 +20,13 @@
 - VueJS: VueJS with WebPack (vuejs)
 - WebPack: Dev, Test & Prod setup (webpack)
 
-To start with a project
+To begin with a project
 
+    # if you have yarn installed
     yarn install
+
+    # or
+    npm install
 
 And view the package.json 'script' tag for the available commands
 
@@ -32,6 +36,8 @@ And view the package.json 'script' tag for the available commands
     }
 
 ### View Slides (in presentation style)
+
+The slides are written in markdown and can be presented with 'reveal-md'.
 
 // install reveal-md
 > npm install -g reveal-md
@@ -48,4 +54,4 @@ And view the package.json 'script' tag for the available commands
 
 ## License
 
-Copyright (c) 2016 Zeal, LLC.  Licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Copyright (c) 2017 Euricom nv. Licensed under the [MIT license](https://opensource.org/licenses/MIT).
