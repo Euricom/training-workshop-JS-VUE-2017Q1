@@ -1,10 +1,10 @@
 {
-    "name": "webpack-template",
+    "name": "node-app",
     "version": "1.0.0",
-    "description": "WebPack Template",
+    "description": "ES.Next Node Template",
     "scripts": {
-        "serve": "webpack-dashboard -- webpack-dev-server --open --inline --hot",
-        "build": "cross-env NODE_ENV=production webpack"
+        "build": "babel . -d ./build --ignore node_modules",
+        "start": "nodemon main.js --exec babel-node"
     },
     "author": "",
     "license": "MIT",
@@ -12,24 +12,12 @@
     "devDependencies": {
         "babel-cli": "^6.18.0",
         "babel-core": "^6.21.0",
-        "babel-loader": "^6.2.10",
         "babel-preset-es2017-node7": "^0.4.1",
         "babel-preset-latest": "^6.16.0",
         "babel-preset-stage-2": "^6.18.0",
-        "cross-env": "^3.1.4",
-        "css-loader": "^0.26.1",
         "eslint": "^3.13.1",
         "eslint-config-standard": "^6.2.1",
         "eslint-plugin-promise": "^3.4.0",
-        "eslint-plugin-standard": "^2.0.1",
-        "extract-text-webpack-plugin": "^2.0.0-beta",
-        "file-loader": "^0.9.0",
-        "json-loader": "^0.5.4",
-        "node-sass": "^4.3.0",
-        "style-loader": "^0.13.1",
-        "url-loader": "^0.5.7",
-        "webpack": "2.2.0",
-        "webpack-dashboard": "^0.2.1",
-        "webpack-dev-server": "2.2.0"
+        "eslint-plugin-standard": "^2.0.1"
     }
 }

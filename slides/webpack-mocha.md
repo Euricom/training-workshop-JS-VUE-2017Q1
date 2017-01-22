@@ -215,3 +215,10 @@ it('has document', function () {
     expect(div.nodeName).to.equal('DIV')
 })
 ```
+
+---
+
+# Resource
+
+    Unit Testing Using Mocha, React, and Webpack
+    https://www.youtube.com/watch?v=jhRx6r7BQNI
