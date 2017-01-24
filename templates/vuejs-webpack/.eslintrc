@@ -1,10 +1,8 @@
 {
-    "extends": "standard",
-    "env": {
-        "mocha": true
-    },
+    "extends": ["vue", "standard"],
+    "plugins": ["vue"],
     "rules": {
-        // "indent": [2, 4],
+        "indent": [2, 4],
         "comma-dangle": ["error", "always-multiline"]
     }
 }
