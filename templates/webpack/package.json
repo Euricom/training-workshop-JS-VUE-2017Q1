@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "WebPack Template",
     "scripts": {
-        "serve": "webpack-dashboard -- webpack-dev-server --open --inline --hot",
+        "serve": "webpack-dev-server --open --inline --hot",
+        "serve:db": "webpack-dashboard -- webpack-dev-server --open --inline --hot",
         "build": "cross-env NODE_ENV=production webpack"
     },
     "author": "",
@@ -30,6 +31,7 @@
         "url-loader": "^0.5.7",
         "webpack": "2.2.0",
         "webpack-dashboard": "^0.2.1",
-        "webpack-dev-server": "2.2.0"
+        "webpack-dev-server": "2.2.0",
+        "webpack-merge": "^2.4.0"
     }
 }

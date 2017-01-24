@@ -862,9 +862,9 @@ export default {
 </script>
 ```
 ```html
-<style lang="sass" scoped>
+<style >
 .example {
-  color: @alertColor;
+  color: red;
 }
 </style>
 ```
