@@ -222,3 +222,6 @@ it('has document', function () {
 
     Unit Testing Using Mocha, React, and Webpack
     https://www.youtube.com/watch?v=jhRx6r7BQNI
+
+    Vue tooling for VSCode
+    https://marketplace.visualstudio.com/items?itemName=octref.vetur
