@@ -269,7 +269,7 @@ const store = new Vuex.Store({
 })
 ```
 
-You can access the state object as store.state, and trigger a state change with the store.commit method (dispath in redux/flux)
+You can access the state object as store.state, and trigger a state change with the store.commit method
 
 ```js
 const app = new Vue({
@@ -304,7 +304,6 @@ const store = new Vuex.Store({
     },
     mutations: {
         increment: state => state.count++,
-        decrement: state => state.count--,
         incrementBy: (state, n) => state.count += n,
     }
 })
@@ -347,46 +346,6 @@ const app = {
             this.$store.commit('decrement')
         }
     }
-})
-```
-
-----
-
-## Object style commit
-
-```js
-store.commit({
-    type: 'increment',
-    amount: 10
-})
-
-```
-
-```js
-mutations: {
-    increment (state, payload) {
-        state.count += payload.amount
-    }
-}
-```
-
-Or better
-
-```js
-// types.js
-export const INCREMENT = 'INCREMENT'
-
-// store.js
-mutations: {
-    [INCREMENT] (state) {
-      // mutate state
-    }
-}
-
-// component.js
-this.$store.commit({
-    type: INCREMENT,
-    amount: 10,
 })
 ```
 
@@ -509,6 +468,8 @@ this.$store.dispatch('getCustomer')
     })
 ```
 
+`Dispatch` can take a payload like `commit` does.
+
 ----
 
 ## Vuex Helpers
@@ -558,7 +519,15 @@ export default {
 
 ## The mapGetters helper
 
-The mapGetters helper simply maps store getters to local computed properties
+```js
+computed: {
+    doneTodosCount () {
+        return this.$store.getters.doneTodosCount;
+    }
+}
+```
+
+vs
 
 ```js
 import { mapGetters } from 'vuex'
@@ -574,6 +543,10 @@ export default {
         ])
     }
 }
+```
+
+```html
+    <span>{{doneTodosCount}}</span>
 ```
 
 ----
@@ -690,6 +663,7 @@ store.state.user // -> moduleB's state
 ```
 
 ---
+
 # Resources
 
 - T.B.D
