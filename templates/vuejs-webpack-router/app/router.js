@@ -8,7 +8,7 @@ import Bar from './components/bar.vue'
 
 // Create route array
 const routes = [
-  { path: '/foo/:id', component: Foo },
+  { path: '/foo/:id', component: Foo, meta: { name: 'peter '} },
   { path: '/bar', component: Bar },
 ]
 
@@ -16,4 +16,9 @@ const routes = [
 export const router = new VueRouter({
     mode: 'history',
     routes,
+})
+
+router.beforeEach((to, from, next) => {
+    console.log('route change', to)
+    next()
 })

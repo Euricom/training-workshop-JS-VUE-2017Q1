@@ -1,6 +1,7 @@
 # VueJS - Plugins
 <img src="./images/vue-plugins.jpeg" width="700px" /><br>
 <small>by Peter Cosemans</small>
+<small>v1.0 - 25 jan 2017</small>
 
 - Vue Router
 - Vuex
@@ -167,7 +168,53 @@ router.go(-1)
 
 ## Navigation Guards
 
-T.B.D
+Global guards
+
+```js
+const router = new VueRouter({ ... })
+
+router.beforeEach((to, from, next) => {
+  // ...
+  next();   // or to abort: next(false)
+})
+
+router.afterEach((to, from) => {
+  // ...
+  next();   // or to abort: next(false)
+})
+```
+
+Guards can also be define at 'route' and at 'component' level: <br>
+http://router.vuejs.org/en/advanced/navigation-guards.html
+
+----
+
+## Navigation Guards Sample
+
+```js
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/foo',
+      component: Foo,
+      meta: { requiresAuth: true }
+    }
+  ]
+})
+```
+
+```js
+router.beforeEach((to, from, next) => {
+    if (to.meta.requiresAuth)) {
+        if (!auth.loggedIn()) {
+            return next('/login')
+        }
+    }
+    // continue with route
+    next()
+})
+
+```
 
 ---
 
