@@ -1,7 +1,33 @@
-# training-workshop-JS-VUE-2017Q1
+# Javascript / VueJS Workshop
 
-### Content
+# Agenda
 
+- Day 1: Javascript
+- Day 2: WebPack & VueJS
+- Day 3: VueJS (continue) & Intro Unit Testing
+- Day 4: VueJS Unit Testing & QA
+
+# Prerequisites
+
+- Knowledge / Experience
+    + Javascript (jquery)
+    + HTML / CSS / BootStrap
+    + Chrome Dev Tools
+
+- System Setup
+    + GIT client ([git cli](https://git-scm.com/), [SourceTree](https://www.sourcetreeapp.com/))
+    + [NodeJS 7.x](https://nodejs.org/en/download/current/)
+    + [Visual Studio Code](https://code.visualstudio.com/)
+    + [Chrome](https://www.google.com/chrome/)
+    + Optional but usefull
+        * [Yarn](https://yarnpkg.com/)
+        * Improved terminal ([iTerm](https://www.iterm2.com/), [cmdr](http://cmder.net/) + bash)
+
+# Content
+
+### TOC
+
+- [Intro](./slides/intro.md)
 - JavaScript
     + [Know your javascript](./slides/js-know-your-javascript.md)
     + [ES6 and beyond](./slides/js-es6-and-beyond.md)
@@ -11,29 +37,6 @@
 - VueJS
     + [Intro to VueJS](./slides/vuejs.md)
     + [VueJS with WebPack](./slides/vuejs-webpack.md)
-
-### Templates projects
-
-- JS: Babel and ESLint (js-node)
-- UT: Mocha, Chai and Sinon (mocha-chai-sinon)
-- UT: Mocha, Chai and testdouble (mocha-chai-td)
-- VueJS: VueJS with WebPack (vuejs)
-- WebPack: Dev, Test & Prod setup (webpack)
-
-To begin with a project
-
-    # if you have yarn installed
-    yarn install
-
-    # or
-    npm install
-
-And view the package.json 'script' tag for the available commands
-
-    // package.json
-    "script": {
-        "test": "mocha ./app/*.spec.js"
-    }
 
 ### View Slides (in presentation style)
 

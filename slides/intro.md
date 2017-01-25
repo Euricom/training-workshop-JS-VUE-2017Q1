@@ -5,7 +5,7 @@
 
 # Me
 
-- Peter Cosemans @ Euricom
+- Peter Cosemans (Euricom)
     - peter.cosemans@euri.com
     - https://github.com/mjrio
     - http://github.com/euricom
@@ -20,13 +20,6 @@
 ---
 
 # Agenda
-
-- Day 1: Javascript
-- Day 2: Intro Unit Testing & WebPack
-- Day 3: VueJS
-- Day 4: Unit Testing VueJS & QA
-
-Or
 
 - Day 1: Javascript
 - Day 2: WebPack & VueJS
@@ -53,33 +46,35 @@ Or
 
 # Agenda
 ### Tue - Day 2
-+ Unit Testing
-    * Setup: Mocha/Chai
-    * Async
-    * Spies & stubs
-    * Testing API calls
 + WebPack
     * Setup
     * DevServer
     * Rules
     * Plugins
     * Dev vs Production
-
-----
-
-# Agenda
-### Mon - Day 3
-
 - VueJS Intro
     + Setup
     + Binding
     + Events
     + Components
     + Forms
+
+----
+
+# Agenda
+### Mon - Day 3
+
 - VueJS with ES6 & WebPack
     + .vue files
     + vue-loader (for webpack)
     + styling (scoped, less)
+    + routing
+    + vuex
++ Unit Testing
+    * Setup: Mocha/Chai
+    * Async
+    * Spies & stubs
+    * Testing API calls
 
 ----
 
@@ -91,6 +86,24 @@ Or
     * Testing services
     * Testing components
 + Questions & Answers
+
+----
+
+# Prerequisites
+
+- Knowledge / Experience
+    + Javascript (jquery)
+    + HTML / CSS / BootStrap
+    + Chrome Dev Tools
+
+- System Setup
+    + GIT client ([git cli](https://git-scm.com/), [SourceTree](https://www.sourcetreeapp.com/))
+    + [NodeJS 7.x](https://nodejs.org/en/download/current/)
+    + [Visual Studio Code](https://code.visualstudio.com/)
+    + [Chrome](https://www.google.com/chrome/)
+    + Optional but usefull
+        * [Yarn](https://yarnpkg.com/)
+        * Improved terminal ([iTerm](https://www.iterm2.com/), [cmdr](http://cmder.net/) + bash)
 
 ---
 

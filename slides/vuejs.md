@@ -1,6 +1,7 @@
 # VueJS - Intro
 <img src="./images/vue-logo.png" width="400px" /><br>
 <small>by Peter Cosemans</small>
+<small>v1.0 - 25 jan 2017</small>
 
 <!-- Align our list to the left -->
 <style type="text/css">
@@ -885,7 +886,6 @@ export default {
     ---------------           ----------------
     [attr]="value"            :attr="value" or v-bind:attr="value"
     (click)="onClick()"       @click="onClick" or v-on:click="onClick"
-    @Input() name             props: ['name']
     {{name}}                  {{name}}
     [innerHtml]="rawHtml"     v-html="rawHtml"
     *ngFor="item of items"    v-for="item in items"
@@ -906,6 +906,7 @@ export default {
     template: `<div>{{sample}}</div>`,
 })
 export class CounterComponent {
+    @Input() name
     constructor() {
         this.name = 'sample'
     }
@@ -919,6 +920,7 @@ export class CounterComponent {
 ```js
 // VueJS
 Vue.component('counter', {
+    props: ['name']
     template: `<div>{{sample}}</div>`,
     methods: {
         onCustomHandle() {
@@ -976,6 +978,11 @@ General
 Advanced
 
 - [Vue.js JSDOM](https://forum.vuejs.org/t/vue-js-jsdom-doesnt-render-properly/1283/4)
+
+Tools/Libraries
+
+- [VueDash](http://vuedash.com/)
+- [Vue Bulma UI Components](https://github.com/vue-bulma)
 
 
 

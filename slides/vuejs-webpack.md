@@ -1,6 +1,7 @@
 # VueJS - WebPack
 <img src="./images/vue-file.png" width="400px" /><br>
 <small>by Peter Cosemans</small>
+<small>v1.0 - 25 jan 2017</small>
 
 ---
 
@@ -47,6 +48,8 @@ $primary-color: #333;
 # Setup
 
 > Lets build with WebPack, ES6+ and .vue files
+
+https://vue-loader.vuejs.org/en/
 
 ----
 
@@ -411,8 +414,44 @@ Setup script: package.json
 
 > Linting vue files doesn't work in VSCode!
 
----
+----
 
+## Application structure
+
+```
+├─ index.thml
+├─ main.js
+├─ core
+│   ├── util.js                 # re-usable utilities
+│   └── util.spec.js
+│   └── ...
+```
+```
+├─ services                     # app services
+│   ├── customerApi
+│   ├── customerApi.spec.js
+│   ├── authService
+│   └── ...
+```
+```
+├─ components
+│   └── app.vue
+│   ├── app.spec.js
+│   ├── orders
+│   │     ├── orderList.vue
+│   │     ├── orderDetail.vue
+│   │     └── ...
+│   └── customer                # alternative component per folder
+│        └── customer.js
+│        ├── customer.html
+│        ├── customer.scss
+│        ├── customer.spec.js
+│        ├── helper.js
+│        ├── helper.spec.js
+│        └── ...
+```
+
+---
 # Resources
 
 - [vue-loader](https://vue-loader.vuejs.org/en/)
