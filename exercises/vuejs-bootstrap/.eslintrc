@@ -1,0 +1,8 @@
+{
+    "extends": ["vue", "standard"],
+    "plugins": ["vue"],
+    "rules": {
+        "indent": [2, 2],
+        "comma-dangle": ["error", "always-multiline"]
+    }
+}

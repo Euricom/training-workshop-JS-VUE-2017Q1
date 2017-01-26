@@ -909,7 +909,7 @@ More: https://vuejs.org/v2/guide/custom-directive.html#Hook-Functions
 
 See './exercise/vuejs' for a simple solution
 
-See [https://github.com/javisperez/vuetranslate](https://github.com/javisperez/vuetranslate) for a full solution.
+See [https://github.com/javisperez/vuetranslate](https://github.com/javisperez/vuetranslate) for a solution.
 
 ---
 
