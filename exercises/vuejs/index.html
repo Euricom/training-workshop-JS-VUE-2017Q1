@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My First Vue</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="root" class="container">
+        
+        <h1>{{message}}</h1>
+
+        <!-- exercise: toggle text -->
+
+        <span :class="{ hidden: !showText }">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+            Aenean commodo ligula eget dolor. Aenean massa.
+        </span><br><br>
+        <button @click="showText = !showText">Toggle text</button>
+
+        <hr>
+
+        <!-- exercise: alert box -->
+
+        <alert @closed="onClosed()">
+            <strong>Alert: </strong> We have a problem.
+        </alert>
+
+        <!-- exercise: translate directive -->
+        
+        <button @click="setLang('nl')">NL</button>
+        <button @click="setLang('en')">EN</button>
+        <span v-translate>Welcome to Vue</span>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@2.1.10/dist/vue.js"></script>
+    <script src="./translate.js"></script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
