@@ -381,6 +381,44 @@ module.exports = {
 
 ---
 
+## Application structure
+
+```
+├─ index.thml
+├─ main.js
+├─ routing.js
+├─ core
+│   ├── util.js                 # re-usable utilities
+│   ├── util.spec.js
+│   └── ...
+```
+```
+├─ services                     # app services
+│   ├── customerApi
+│   ├── customerApi.spec.js
+│   ├── authService
+│   └── ...
+```
+```
+├─ components
+│   └── app.vue
+│   ├── app.spec.js
+│   ├── orders
+│   │     ├── orderList.vue
+│   │     ├── orderDetail.vue
+│   │     └── ...
+│   └── customer                # alternative component per folder
+│        ├── customer.js
+│        ├── customer.html
+│        ├── customer.scss
+│        ├── customer.spec.js
+│        ├── helper.js
+│        ├── helper.spec.js
+│        └── ...
+```
+
+---
+
 # ESLint your vue files
 
 > Don't forget your linting
@@ -414,44 +452,23 @@ Setup script: package.json
 
 > Linting vue files doesn't work in VSCode!
 
-----
+---
 
-## Application structure
+# Exercise (large)
 
-```
-├─ index.thml
-├─ main.js
-├─ core
-│   ├── util.js                 # re-usable utilities
-│   └── util.spec.js
-│   └── ...
-```
-```
-├─ services                     # app services
-│   ├── customerApi
-│   ├── customerApi.spec.js
-│   ├── authService
-│   └── ...
-```
-```
-├─ components
-│   └── app.vue
-│   ├── app.spec.js
-│   ├── orders
-│   │     ├── orderList.vue
-│   │     ├── orderDetail.vue
-│   │     └── ...
-│   └── customer                # alternative component per folder
-│        └── customer.js
-│        ├── customer.html
-│        ├── customer.scss
-│        ├── customer.spec.js
-│        ├── helper.js
-│        ├── helper.spec.js
-│        └── ...
-```
+> Build an app to show a list of users
+
+- Use the /api/user API from (vuejs-webpack-api)
+- To make a http call you can use `fetch` api or `axios` library
+- Use bootstrap for styling
+- Show image, fullname, email and age in table format.
+- Optional
+    - Make the headers clickable to sort rows
+    - Make an alternative view to show users in panels (and switch between the views)
+    - Click on a users name and show all details (left or bottom)
 
 ---
+
 # Resources
 
 - [vue-loader](https://vue-loader.vuejs.org/en/)
