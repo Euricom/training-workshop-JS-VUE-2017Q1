@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const pkg = require('../package.json')
+const pkg = require('./package.json')
 
 const env = process.env.NODE_ENV || 'development'
 
@@ -16,6 +16,8 @@ module.exports = {
             { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
             { test: /\.json$/, loader: 'json-loader' },
             { test: /\.html$/, loader: 'html-loader' },
+            { test: /\.css$/, loader: 'style-loader!css-loader' },
+            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
             { test: /\.vue$/, loader: 'vue-loader' },
             {
                 test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
@@ -41,7 +43,10 @@ module.exports = {
     ],
     // https://webpack.js.org/configuration/devtool/
     devtool: 'eval-cheap-module-source-map',
-}
 
-console.log('App Version: ', pkg.version)
-console.log('Build Env: ', env)
+    devServer: {
+        historyApiFallback: true,
+        noInfo: false,
+        contentBase: 'app',
+    },
+}
