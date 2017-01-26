@@ -8,13 +8,14 @@
 /*  .reveal p {
     text-align: left;
   }
-*/
+
   .reveal ul {
     display: block;
   }
   .reveal ol {
     display: block;
   }
+*/
 </style>
 
 ---
@@ -231,7 +232,7 @@ new Vue({
     filters: {
         toUpperCase: function (value) {
             if (!value) return ''
-            return value.toString().toUpperCase();
+            return value.toString().toUpperCase()
         }
     }
 })
@@ -427,7 +428,7 @@ It is a very common need to call `event.preventDefault()` or `event.stopPropagat
 ```js
 methods: {
     greet: function (event) {
-        event.preventDefault();
+        event.preventDefault()
         ...
     }
 }
@@ -448,11 +449,82 @@ Key modifiers:
 
 More: https://vuejs.org/v2/guide/events.html#Event-Modifiers
 
-----
+---
 
 # Exercise
 
 > Use a button to toggle (hide/show) a paragraph of text
+
+- Look for 3 solutions
+
+----
+
+## Exercise - Solution 1
+
+v-if
+
+```html
+<span v-if="showText">
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+    Aenean commodo ligula eget dolor. Aenean massa.
+</span>
+<button @click="onToggle()">Toggle text</button>
+```
+
+and onToggle method
+
+```js
+{
+    data () {
+        return {
+            showText: true,
+        }
+    },
+    methods: {
+        onToggle () {
+            this.showText = !this.showText
+        },
+    },
+}
+```
+
+----
+
+## Exercise - Solution 2/3
+
+v-show
+
+```html
+<span v-show="showText">
+    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+    Aenean commodo ligula eget dolor. Aenean massa.
+</span>
+<button @click="showText = !showText">Toggle text</button>
+```
+
+:class
+
+```html
+<head>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <span :class="{ hidden: !showText }">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+            Aenean commodo ligula eget dolor. Aenean massa.
+        </span>
+        <button @click="showText = !showText">Toggle text</button>
+    </div>
+    ...
+</body>
+```
+
 
 ---
 
@@ -474,12 +546,6 @@ var MyComponent = Vue.extend({
 
 // Register the constructor with id: my-component
 Vue.component('my-component', MyComponent)
-
-// create app
-new Vue({
-    el: '#root',
-    ...
-})
 ```
 
 Simplified
@@ -533,7 +599,7 @@ And use it
 
 ----
 
-## Custom properties: props
+## Custom attributes: props
 
 ```js
 var MyComponent = Vue.extend({
@@ -566,7 +632,7 @@ More https://vuejs.org/v2/guide/components.html#Prop-Validation
 
 ## Dynamic props
 
-You can use `v-bind` on custom properties
+You can use `v-bind` (or use : syntax) on custom properties
 
 ```html
 <my-component :title="title" :sub-title="subTitle">
@@ -644,6 +710,7 @@ More: https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram
 ```
 
 - Don't use jqeury or the bootstrap js library
+- Log a message to the console if the dialog is closed
 
 ---
 
@@ -685,6 +752,9 @@ More: https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram
 <span>Selected: {{ selected }}</span>
 ```
 
+<small>
+For form validation see: https://github.com/logaretm/vee-validate
+</small>
 
 ---
 
@@ -735,18 +805,18 @@ And listen for it
 ```js
 class EventAggregator {
     constructor() {
-        this.vue = new Vue();
+        this.vue = new Vue()
     }
 
     fire(event, data = null) {
-        this.vue.$emit(event, data);
+        this.vue.$emit(event, data)
     }
 
     listen(event, callback) {
-        this.vue.$on(event, callback);
+        this.vue.$on(event, callback)
     }
 }
-export const eventAggregator = new EventAggregator();
+export const eventAggregator = new EventAggregator()
 ```
 
 Usage
@@ -804,23 +874,18 @@ More: https://vuejs.org/v2/guide/custom-directive.html#Hook-Functions
 - We have the following translation service
 
 ```js
-    class TranlationService {
-        constructor() {
+    class TranslationService {
+        constructor () {
             this.translations = {
                 'Welcome to Vue': {
                     nl: 'Welkom in Vue',
                 },
-                ...
             }
+            this.language = 'nl'
         }
-```
-```js
-        getTranslation(message) {
-            const trans = this.translations[message][this.language];
-            return trans || message;
-        }
-        setLanguage(language) {
-            this.language = language
+        getTranslation (message) {
+            const trans = this.translations[message][this.language]
+            return trans || message
         }
     }
 ```
@@ -836,41 +901,15 @@ More: https://vuejs.org/v2/guide/custom-directive.html#Hook-Functions
     <h1>Welkom in Vue</h1>
 ```
 
+- use vm.$forceUpdate() to re-render the view on language change
+
 ---
 
-# Vue Component Spec
+# Exercise - Solution
 
-> The *.vue files syntax
+See './exercise/vuejs' for a simple solution
 
-----
-
-## .vue file
-
-```html
-<template>
-  <div class="example">{{ msg }}</div>
-</template>
-```
-```html
-<script>
-export default {
-  data () {
-    return {
-      msg: 'Hello world!'
-    }
-  }
-}
-</script>
-```
-```html
-<style >
-.example {
-  color: red;
-}
-</style>
-```
-
-> To use this file we need webpack (or browserify) with a custom loader.
+See [https://github.com/javisperez/vuetranslate](https://github.com/javisperez/vuetranslate) for a full solution.
 
 ---
 
@@ -984,6 +1023,8 @@ Tools/Libraries
 - [VueDash](http://vuedash.com/)
 - [Vue Bulma UI Components](https://github.com/vue-bulma)
 
+Book
 
+- [The Majesty of Vue.js 2](https://leanpub.com/vuejs2/c/launchday)
 
 

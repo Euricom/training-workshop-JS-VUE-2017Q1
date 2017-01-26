@@ -351,6 +351,52 @@ const app = {
 
 ----
 
+## Commit object
+
+If you want to pass multiple arguments
+
+```js
+methods: {
+    addProduct (product, price) {
+        this.$store.commit('increment', { product, price } )
+    },
+}
+```
+
+Alternative you can write
+
+```js
+// or
+addProduct (product, price) {
+    this.$store.commit('addProduct', {
+        product,
+        price
+    })
+},
+
+// or
+addProduct (product, price) {
+    this.$store.commit({
+        type: 'addProduct',
+        product,
+        price
+    })
+},
+
+```
+
+And use it in your mutations
+
+```js
+mutations: {
+    addProduct: (state, playload) => {
+        console.log('add product', payload.product, payload.price)
+    }
+}
+```
+
+----
+
 ## Object state
 
 ```js
@@ -426,10 +472,10 @@ const store = new Vuex.Store({
         }
     },
     mutations: {
-        [GET_CUSTOMER_REQUEST] (state) {
+        getCustomerRequest (state) {
             state.loading = true;
         },
-        [GET_CUSTOMER_RESULT] (state, playload) {
+        getCustomerResult (state, playload) {
             state.items = playload.result;
             state.loading = false;
         }
@@ -438,10 +484,10 @@ const store = new Vuex.Store({
 ```js
     actions: {
         getCustomer ({ commit, getters, state }) {
-            commit(GET_CUSTOMER_REQUEST)
+            commit('getCustomerRequest')
             return service.getCustomers()
                 .then(result => {
-                    commit({ type: GET_CUSTOMER_RESULT, result })
+                    commit('getCustomerResult', result })
                 })
         }
     }
@@ -469,6 +515,35 @@ this.$store.dispatch('getCustomer')
 ```
 
 `Dispatch` can take a payload like `commit` does.
+
+----
+
+## Form handling
+
+This doesn't work with vuex (you get an error in develop mode)
+
+```js
+<input v-model="obj.message">
+```
+
+The 'Vuex' way
+
+```html
+<input :value="message" @input="updateMessage()">
+```
+
+```js
+computed: {
+    message() {
+        return this.$store.obj.message;
+    }
+},
+methods: {
+    updateMessage (e) {
+        this.$store.commit('updateMessage', e.target.value)
+    }
+}
+```
 
 ----
 
@@ -577,6 +652,49 @@ export default {
 }
 ```
 
+## The mapActions helper
+
+```js
+import { mapActions } from 'vuex'
+
+export default {
+    // ...
+    ...mapActions({
+        // map this.add() to this.$store.dispatch('increment')
+        add: 'increment'
+    })
+
+    // alternative style (without alias)
+    ...mapActions([
+        'increment'
+    ])
+}
+```
+
+----
+
+## Typical use helpers
+
+```js
+import { mapActions, mapMutations, mapGetters } from 'vuex'
+
+export default {
+    ...mapGetters([
+        'doneTodosCount',
+        'anotherGetter',
+    ]),
+    ...mapMutations([
+        'incrementAmount'
+    ]),
+    ...mapActions({
+        add: 'addCustomer'
+    }),
+    otherLocalmethod() {
+
+    },
+}
+```
+
 ----
 
 ## Vuex Modules
@@ -662,8 +780,35 @@ store.state.user // -> moduleB's state
          ├── products.js    # products module
 ```
 
+## Vuex Plugins
+
+> Want to extend vuex
+
+----
+
+## Build in plugins
+
+Vuex comes with a logger plugin for common debugging usage:
+
+```js
+import createLogger from 'vuex/dist/logger'
+
+const store = new Vuex.Store({
+    ...
+    plugins: [createLogger()]
+})
+```
+
+3th party plugins
+
+- [vuex-persistedstate](https://www.npmjs.com/package/vuex-persistedstate)
+- ...
+
+> You can write your own plugins
+
 ---
 
 # Resources
 
-- T.B.D
+- [vuex-action: Utility for vuex to create actions](https://github.com/varHarrie/vuex-action)
+- [Vue2, JSX and redux](https://github.com/aweber1/tour-of-heroes-vue2)

@@ -8,18 +8,8 @@
 
 <body>
     <div id="root">
-        <input type="text" id="input" v-model="message">
-        <p>The Value of the input is: {{message}}</p>
-
-        <ul>
-            <li v-for="name in names">{{name}}</li>
-        </ul>
-
-        <my-component title="My component with title" sub-title="bla bla bla">
-            <h3>content</h3>
-        </my-component>
+        {{message}}
     </div>
-
     <script src="https://unpkg.com/vue@2.1.10/dist/vue.js"></script>
     <script src="./main.js"></script>
 </body>
