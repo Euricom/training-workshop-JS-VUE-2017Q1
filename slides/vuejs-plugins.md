@@ -1,10 +1,13 @@
 # VueJS - Plugins
 <img src="./images/vue-plugins.jpeg" width="700px" /><br>
 <small>by Peter Cosemans</small>
-<small>v1.0 - 25 jan 2017</small>
 
 - Vue Router
 - Vuex
+
+<small>
+Copyright (c) 2017 Euricom nv.
+</small>
 
 ---
 

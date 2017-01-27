@@ -1,5 +1,21 @@
 # Javascript / VueJS Workshop
 <small>by Peter Cosemans</small>
+<br>
+<br>
+<small>
+Copyright (c) 2017 Euricom nv. Licensed under the [MIT license](https://opensource.org/licenses/MIT).
+</small>
+
+---
+
+# Content
+
+### [https://github.com/Euricom/training-workshop-JS-VUE-2017Q1](https://github.com/Euricom/training-workshop-JS-VUE-2017Q1)
+
+- Slides
+- Templates
+- Examples
+- Exercises
 
 ---
 

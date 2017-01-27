@@ -34,9 +34,12 @@
     + [Unit Tests](./slides/unit-tests.md)
 - WebPack
     + [Intro to WebPack](./slides/webpack.md)
+    + [Unit Testing with WebPack](./webpack-mocha.md)
 - VueJS
-    + [Intro to VueJS](./slides/vuejs.md)
+    + [VueJS Intro](./slides/vuejs.md)
     + [VueJS with WebPack](./slides/vuejs-webpack.md)
+    + [VueJS Router & Vuex](./vuejs-plugins.md)
+    + [VueJS Unit Testing](./vuejs-unit-tests.md)
 
 ### View Slides (in presentation style)
 

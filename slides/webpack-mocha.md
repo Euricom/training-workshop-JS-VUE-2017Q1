@@ -2,6 +2,11 @@
 <img src="./images/mocha-webpack.png" width="800px" /><br>
 <small>by Peter Cosemans</small>
 
+<br>
+<small>
+Copyright (c) 2017 Euricom nv.
+</small>
+
 ---
 
 # Testing Web App's

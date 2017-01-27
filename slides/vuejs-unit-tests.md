@@ -1,7 +1,11 @@
 # VueJS - Unit Tests
 <!-- <img src="./images/vue-plugins.jpeg" width="700px" /><br> -->
 <small>by Peter Cosemans</small>
-<small>v1.0 - 26 jan 2017</small>
+
+<br>
+<small>
+Copyright (c) 2017 Euricom nv.
+</small>
 
 ---
 

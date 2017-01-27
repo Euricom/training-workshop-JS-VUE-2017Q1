@@ -1,7 +1,11 @@
 # Javascript Unit Testing
 <img src="./images/testing.jpeg" width="400px" /><br>
 <small>by Peter Cosemans</small>
-<small>v1.0 - 18 jan 2017</small>
+
+<br>
+<small>
+Copyright (c) 2017 Euricom nv.
+</small>
 
 ---
 

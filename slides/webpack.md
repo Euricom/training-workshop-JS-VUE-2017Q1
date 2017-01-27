@@ -2,6 +2,10 @@
 <img src="./images/webpack.png" width="800px" /><br>
 <small>by Peter Cosemans</small>
 
+<small>
+Copyright (c) 2017 Euricom nv.
+</small>
+
 ---
 
 # WebPack (quick start)

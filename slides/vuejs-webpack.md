@@ -1,7 +1,11 @@
 # VueJS - WebPack
 <img src="./images/vue-file.png" width="400px" /><br>
 <small>by Peter Cosemans</small>
-<small>v1.0 - 25 jan 2017</small>
+
+<br>
+<small>
+Copyright (c) 2017 Euricom nv.
+</small>
 
 ---
 

@@ -1,7 +1,10 @@
 # ES6 and beyond
 <img src="./images/beyond.jpg" width="600px" /><br>
 <small>by Peter Cosemans</small>
-<small>v1.0 - 18 jan 2017</small>
+
+<small>
+Copyright (c) 2017 Euricom nv.
+</small>
 
 ---
 
