@@ -9,7 +9,7 @@
     - peter.cosemans@euri.com
     - https://github.com/mjrio
     - http://github.com/euricom
-- 12 year Microsoft .NET
+- 12 year Microsoft .NET Development
 - 4 year Front-end Development
 - Architect, Tech Coach, Trainer
     + JavaScript
@@ -111,12 +111,80 @@
 
 - [Know your javascript](./js-know-your-javascript.md)
 - [ES6 and beyond](./js-es6-and-beyond.md)
-- [Unit Testing](./unit-tests.md)
 - [WebPack](./webpack.md)
 - [VueJS Intro](./vuejs.md)
 - [VueJS with WebPack](./vuejs-webpack.md)
+- [VueJS Router & Vuex](./vuejs-plugins.md)
+- [Unit Testing](./unit-tests.md)
 - [Unit Testing with WebPack](./webpack-mocha.md)
 - [Unit Testing with VueJS](./vuejs-unit-tests.md)
 
+---
 
+# A better VSCode
 
+> Powercharge your editor
+
+----
+
+## Plugins - Must have
+
+| Plugin                    | Remark                           |
+| ------------------------- | ---------------------------------|
+| EditorConfig for VS Code  | -                                |
+| ESLint                    | -                                |
+| Git History (git log)     | Git commits logs                 |
+| Git Blame                 | See Git Blame info in status bar |
+| Git Flow                  | Git Flow Branching commands      |
+| beautify                  | Format JS, CSS, and HTML         |
+| npm Intellisense          | Autocompletes npm modules        |
+| Path Intellisense         | Autocompletes path and filenames |
+
+----
+
+## Plugins - Usefull
+
+| Plugin                    | Remark                           |
+| ------------------------- | ---------------------------------|
+| vetur                     | Syntax highlighting .vue files   |
+| VueHelper                 | Vue code snippets                |
+| mssql                     | Autocomplete & exec sql scripts  |
+| Spelling and Grammer      | -                                |
+| Document This             | JSDoc comments                   |
+| ES6 Mocha Snippets        | -                                |
+| SVG preview               | -                                |
+
+----
+
+## Custom config
+
+Goto `preferences - user settings`
+
+```json
+    // auto save on close
+    "files.autoSave": "onFocusChange",
+
+    // let ESlint validate my JS code
+    "javascript.validate.enable": false,
+
+    // default exclude on search
+    "search.exclude": {
+        "**/*bundle.js": true,
+        "**/node_modules": true,
+        "**/bower_components": true
+    },
+```
+```json
+    // don't check typescript version'
+    "typescript.check.tscVersion": false,
+
+    // linting vue files
+    "files.associations": {
+        "*.vue": "vue"
+    },
+
+    // github markdown preview
+    "markdown.styles": [
+        "https://gitcdn.xyz/repo/aui/vs-code-github-markdown-theme/master/index.css"
+    ],
+```

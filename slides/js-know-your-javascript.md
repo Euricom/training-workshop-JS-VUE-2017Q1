@@ -1094,7 +1094,7 @@ Object.getPrototypeOf(person) === person.__proto__);    // true
 
 ## New keyword
 
-> Remember when the new keyboard did
+> Remember what the new keyboard did
 
 - A new object is created
 - *** --> The __proto__ property is set to the function prototype   <--- ***

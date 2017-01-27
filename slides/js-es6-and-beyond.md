@@ -70,7 +70,6 @@ The process:
 - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 - [JavaScript Standard Style Guide](http://standardjs.com/)
 <br>
-<br>
 
 ## Linting tools
 
@@ -97,7 +96,7 @@ The process:
             "node": true
        },
        "rules": {
-           "indent": [2, 4],
+           "indent": [2, 4],    // tab = 4 spaces
            // ...
        }
     }
@@ -473,7 +472,7 @@ vs
     // Method definition shorthand syntax omits `function` keyword & colon
     function getCar(make, model, value) {
         return {
-            depreciate() {
+            depreciate () {
                 this.value -= 2500;
             }
         };
@@ -512,7 +511,7 @@ Shorter
 
     // alternative
     const createAction = (name) => ({
-        namename,
+        name,
         role: 'user'
     })
 ```
@@ -625,7 +624,7 @@ When not to use
 
 ## The arrow function
 
-When not to use - solution
+Solution
 
 ```js
     // Object literal
@@ -962,7 +961,7 @@ car.value = -1;             <- ERROR
     console.log(volume(...[2, 8, 5]));
 ```
 
-Modify an immutable array
+Example: modify an immutable array
 
 ```js
     // mutable change
@@ -985,7 +984,7 @@ Modify an immutable array
 <!-- .slide: data-transition="concave" -->
 ## Spread operator
 
-Clone an array
+Example: Clone an array
 
 ```js
     // old way
@@ -997,7 +996,7 @@ Clone an array
     const newArray = [...oldArray];
 ```
 
-Combine two arrays
+Example: Combine two arrays
 
 ```js
     var x = [1, 2];
@@ -1067,59 +1066,14 @@ Replaces Q, Bluebird, ... One to rules them all
         var { url, methodType, data } = config;
         console.log(url, methodType, data );
     }
+
+    // or
+    function makeAjaxRequest({ url, methodType }){
+        console.log(url, methodType );
+    }
 ```
 
-----
-
-## Array Destructuring
-
-```js
-    // Array destructuring: uses an iterator to get to the elements of a source
-    let [x, ...y] = 'abc';   // x='a'; y=['b', 'c']
-```
-
-Combines desctructering with spread operator
-
-```js
-    // ES5 - Result of multiple promises
-    Promise.all([promiseGetUsers, promiseGetCustomers])
-        .then((result) => {
-            var users = result[0];
-            var customers = result[1];
-            console.log(users, customers);
-        });
-
-    // ES6: Array destructuring result
-    Promise.all([promiseGetUsers, promiseGetCustomers])
-        .then(([users, customers]) => {
-            console.log(users, customers);
-        });
-```
-Less lines to write, less confusion
-
-----
-
-### Object.is
-
-```js
-    // we all know
-    “0” == 0  // true
-    “0” === 0 // false (better to use this)
-
-    // but this doesn't work
-    NaN == NaN  // false
-    NaN === NaN  // false
-
-    var result = isNan(NaN) // workaround
-```
-
-```js
-    // ES6 - this is always correct
-    Object.is(0 ,”0”) // false
-    Object.is(0 ,0) // true
-    Object.is(NaN, NaN) // true
-```
-
+Destructuring is also possible on arrays.
 
 ----
 
@@ -1155,175 +1109,36 @@ Less lines to write, less confusion
 
 ----
 
-### Object.keys
-
-Retrieves all string keys of all properties.
-
-```js
-    const x = {
-        id: 1234,
-        name: 'abc',
-    }
-    Object.keys(x) === ['id', 'name']
-```
-
-Alternative
-
-```js
-    for (const key in obj) {
-        ...
-    }
-```
-
-----
-
-### Generators
-
-The basics
-
-```js
-    function *foo() {
-        yield 1;
-        yield 2;
-        yield 3;
-        yield 4;
-        yield 5;
-    }
-```
-
-```js
-    // get an iterator
-    var it = foo();
-
-    // get the result
-    it.foo();     // 1
-    it.foo();     // 2
-    it.foo();     // 3
-    ...
-
-    // loop over
-    for(const i of it) {
-        console.log(i)
-    }
-```
-
-----
-
-### Generators
-
-More practical example
-
-```js
-    var activeUsers = _.filter(users, function(user) {
-        return user.isActive
-    });
-    var ages = _.map(activeUsers, function(user) {
-        return user.age
-    });
-```
-
-```js
-    function *map(items, transform) {
-      for (item of items)
-        yield transform(item);
-    }
-    function *filter(items, predicate) {
-      for (item of items)
-        if (predicate(item))
-          yield item;
-    }
-```
-
-```js
-    for (const user of activeusers) {
-        console.log(user);
-    }
-```
-
-----
-
 ## Still using underscore?
 
-Euhhhh, way not?
+Euhhhh, way?
 
 ```js
-    // Underscore                           ES5/6
-    // ----------------------               ---------------------
-    _.each(array, iteratee)                 array.forEach(iteratee)
-    _.map(array, iteratee)                  array.map(iteratee)
-    _.reduce(array, iteratee, memo)         array.reduce(iteratee, memo)
-    _.every(array, predicate)               array.every(predicate)
-    _.some(array, predicate)                array.some(predicate)
-    _.find(array, predicate)                array.find(predicate)
-    _.includes(array, element)              array.includes(element)
-    _.toArray(arguments)                    [...arguments]
-    _.compact(array)                        array.filter(x => !!x)
-    _.indexOf(array, value)                 array.indexOf(value)
-    _.keys(object)                          Object.keys(object)
+    // Underscore                       ES5/6
+    // ----------------------           ---------------------
+    _.each(array, iteratee)             array.forEach(iteratee)
+    _.map(array, iteratee)              array.map(iteratee)
+    _.reduce(array, iteratee, memo)     array.reduce(iteratee, memo)
+    _.every(array, predicate)           array.every(predicate)
+    _.some(array, predicate)            array.some(predicate)
+    _.find(array, predicate)            array.find(predicate)
+    _.includes(array, element)          array.includes(element)
+    _.toArray(arguments)                [...arguments]
+    _.compact(array)                    array.filter(x => !!x)
+    _.indexOf(array, value)             array.indexOf(value)
+    _.keys(object)                      Object.keys(object)
 ```
 <!-- .element: class="fragment" data-fragment-index="2" -->
 
 ```js
-    _.assign({}, source, {a:false})         Object.assign({},source,{a:false})
-    _.extendOwn({}, object)                 { ...object }
-    _.isArray(object)                       Array.isArray(object)
-    _.noop                                  () => {}
-    _.template("hello <%= name %>")         `hello ${name}`
-    _.deepClone(source)                     X
+    _.assign({}, source, {a:false})     Object.assign({},source,{a:false})
+    _.extendOwn({}, object)             { ...object }
+    _.isArray(object)                   Array.isArray(object)
+    _.noop                              () => {}
+    _.template("hello <%= name %>")     `hello ${name}`
+    _.deepClone(source)                 X
 ```
 <!-- .element: class="fragment" data-fragment-index="2" -->
-
-----
-
-## Symbols
-
-Properties of an object can be either a string (as in ES5)
-or symbol (new in ES6)
-
-```js
-    var key = Symbol("key");
-    const myObject = {
-        [key]: 'abc'
-    }
-```
-
-Can be used as private variable
-
-```js
-    var key = Symbol("key");
-
-    class MyClass {
-        constructor(privateData) {
-            this[key] = privateData;
-        }
-    }
-
-    var x = new MyClass('hello')
-    console.log(JSON.stringify(x))    > Output: {}
-```
-
-----
-
-## String interpollation
-
-Tagged templates
-
-```js
-    const id = 1;
-    const query = graphql `
-        query {
-            user(id: ${id})
-        }
-    `
-
-    function grahql(literals, ...placeholders) {
-      console.log('literals', literals);
-      console.log('placeholder', placeholders);
-      console.log('raw', literals.raw[0]);
-    }
-```
-
-You get the opportunity to pre process the template string literals plus the values.
 
 ---
 
@@ -1399,6 +1214,70 @@ Note: It is supported by TypeScript 1.7+
 
 ----
 
+## Trailing Function Commas
+
+```js
+
+    // Trailing commas are ignored in object literals and arrays
+    const myObject = {
+        id: 1234,
+        name: 'peter',
+    }
+    const cities = {
+        'antwerp',
+        'mechelen',
+        'brussel',
+    }
+```
+
+```js
+    // ES8 - makes it possible on function arguments
+    function doThis(
+        commandName,
+        isMandatory,
+    )
+```
+
+<small>Stage 3<br>Babel plugins:[syntax-trailing-function-commas], TS 2.0 </small>
+
+> Cleaner diff in your git repo
+
+---
+
+# Less used ES6
+
+> If you really want to be good at it
+
+----
+
+## Array Destructuring
+
+```js
+    // Array destructuring: uses an iterator to get to the elements of a source
+    let [x, ...y] = 'abc';   // x='a'; y=['b', 'c']
+```
+
+Combines desctructering with spread operator
+
+```js
+    // ES5 - Result of multiple promises
+    Promise.all([promiseGetUsers, promiseGetCustomers])
+        .then((result) => {
+            var users = result[0];
+            var customers = result[1];
+            console.log(users, customers);
+        });
+
+    // ES6: Array destructuring result
+    Promise.all([promiseGetUsers, promiseGetCustomers])
+        .then(([users, customers]) => {
+            console.log(users, customers);
+        });
+```
+Less lines to write, less confusion
+
+----
+
 ## Decorators
 
 ```js
@@ -1427,33 +1306,165 @@ Note: It is supported by TypeScript 1.7+
 
 ----
 
-## Trailing Function Commas
+## String interpollation
+
+Tagged templates
 
 ```js
+    const id = 1;
+    const query = graphql `
+        query {
+            user(id: ${id})
+        }
+    `
 
-    // Trailing commas are ignored in object literals and arrays
+    function grahql(literals, ...placeholders) {
+      console.log('literals', literals);
+      console.log('placeholder', placeholders);
+      console.log('raw', literals.raw[0]);
+    }
+```
+
+You get the opportunity to pre process the template string literals plus the values.
+
+----
+
+## Symbols
+
+Properties of an object can be either a string (as in ES5)
+or symbol (new in ES6)
+
+```js
+    var key = Symbol("key");
     const myObject = {
-        id: 1234,
-        name: 'peter',
+        [key]: 'abc'
     }
-    const cities = {
-        'antwerp',
-        'mechelen',
-        'brussel',
+```
+
+Can be used as private variable
+
+```js
+    var key = Symbol("key");
+
+    class MyClass {
+        constructor(privateData) {
+            this[key] = privateData;
+        }
+    }
+
+    var x = new MyClass('hello')
+    console.log(JSON.stringify(x))    > Output: {}
+```
+
+----
+
+### Object.keys
+
+Retrieves all string keys of all properties.
+
+```js
+    const x = {
+        id: 1234,
+        name: 'abc',
+    }
+    Object.keys(x) === ['id', 'name']
+```
+
+Alternative
+
+```js
+    for (const key in obj) {
+        ...
+    }
+```
+
+----
+
+### Object.is
+
+```js
+    // we all know
+    “0” == 0  // true
+    “0” === 0 // false (better to use this)
+
+    // but this doesn't work
+    NaN == NaN  // false
+    NaN === NaN  // false
+
+    var result = isNan(NaN) // workaround
+```
+
+```js
+    // ES6 - this is ALWAYS correct
+    Object.is(0 ,”0”) // false
+    Object.is(0 ,0) // true
+    Object.is(NaN, NaN) // true
+```
+
+----
+
+### Generators
+
+The basics
+
+```js
+    function *foo() {
+        yield 1;
+        yield 2;
+        yield 3;
+        yield 4;
+        yield 5;
     }
 ```
 
 ```js
-    // ES8 - makes it possible on function arguments
-    function doThis(
-        commandName,
-        isMandatory,
-    )
+    // get an iterator
+    var it = foo();
+
+    // get the result
+    it.foo();     // 1
+    it.foo();     // 2
+    it.foo();     // 3
+    ...
+
+    // loop over
+    for(const i of it) {
+        console.log(i)
+    }
 ```
 
-<small>Stage 3<br>Babel plugins:[syntax-trailing-function-commas], TS 2.0 </small>
+----
 
-> Cleaner diff in your git repo
+### Generators
+
+More practical example
+
+```js
+    var activeUsers = _.filter(users, function(user) {
+        return user.isActive
+    });
+    var ages = _.map(activeUsers, function(user) {
+        return user.age
+    });
+```
+
+```js
+    function *map(items, transform) {
+      for (item of items)
+        yield transform(item);
+    }
+    function *filter(items, predicate) {
+      for (item of items)
+        if (predicate(item))
+          yield item;
+    }
+```
+
+```js
+    for (const user of activeusers) {
+        console.log(user);
+    }
+```
 
 ---
 
