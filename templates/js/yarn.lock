@@ -346,7 +346,7 @@ babel-plugin-syntax-object-rest-spread@^6.8.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-object-rest-spread/-/babel-plugin-syntax-object-rest-spread-6.13.0.tgz#fd6536f2bce13836ffa3a5458c4903a597bb3bf5"
 
-babel-plugin-syntax-trailing-function-commas@^6.13.0, babel-plugin-syntax-trailing-function-commas@^6.3.13, babel-plugin-syntax-trailing-function-commas@^6.8.0:
+babel-plugin-syntax-trailing-function-commas@^6.3.13, babel-plugin-syntax-trailing-function-commas@^6.8.0:
   version "6.20.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-6.20.0.tgz#442835e19179f45b87e92d477d70b9f1f18b5c4f"
 
@@ -625,15 +625,6 @@ babel-preset-es2016@^6.16.0:
   resolved "https://registry.yarnpkg.com/babel-preset-es2016/-/babel-preset-es2016-6.16.0.tgz#c7daf5feedeee99c867813bdf0d573d94ca12812"
   dependencies:
     babel-plugin-transform-exponentiation-operator "^6.3.13"
-
-babel-preset-es2017-node7@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/babel-preset-es2017-node7/-/babel-preset-es2017-node7-0.4.1.tgz#df557eafe343bbc0b859ac3163fdfb0cf58108e5"
-  dependencies:
-    babel-plugin-syntax-trailing-function-commas "^6.13.0"
-    babel-plugin-transform-class-properties "^6.18.0"
-    babel-plugin-transform-es2015-modules-commonjs "^6.18.0"
-    babel-plugin-transform-object-rest-spread "^6.16.0"
 
 babel-preset-es2017@^6.16.0:
   version "6.16.0"

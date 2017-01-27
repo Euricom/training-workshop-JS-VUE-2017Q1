@@ -1,8 +1,5 @@
 {
   "extends": "standard",
-  "globals": {
-    "Vue": true
-  },
   "rules": {
     "comma-dangle": ["error", "always-multiline"]
   }

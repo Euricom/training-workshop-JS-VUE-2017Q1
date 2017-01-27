@@ -1,18 +1,18 @@
 <template>
-    <div>
-        <h1>{{message}}</h1>
-    </div>
+  <div>
+    <h1>{{message}}</h1>
+  </div>
 </template>
 
 <script>
-export default {
+  export default {
     name: 'message',
     data() {
-        return {
-            message: 'Hello from messsage'
-        }
+      return {
+        message: 'Hello from messsage'
+      }
     },
-}
+  }
 </script>
 
 <style lang="less" scoped>

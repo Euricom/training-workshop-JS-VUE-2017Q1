@@ -3,6 +3,6 @@ import App from './app.vue'
 
 // eslint-disable-next-line
 new Vue({
-    el: '#app',
-    render: h => h(App),
+  el: '#app',
+  render: h => h(App),
 })

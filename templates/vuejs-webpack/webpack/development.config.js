@@ -5,24 +5,27 @@ const webpackBase = require('./base.config')
 
 module.exports = merge.smart(webpackBase, {
 
-    module: {
-        rules: [
-            { test: /\.css$/, loader: 'style-loader!css-loader' },
-            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
-        ],
-    },
-
-    plugins: [
-        // support or webpack dashboard
-        new DashboardPlugin(),
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+      },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader',
+      },
     ],
+  },
 
-    devServer: {
-        historyApiFallback: true,
-        noInfo: false,
-        contentBase: 'app',
-    },
+  plugins: [
+    // support or webpack dashboard
+    new DashboardPlugin(),
+  ],
+
+  devServer: {
+    historyApiFallback: true,
+    noInfo: false,
+    contentBase: 'app',
+  },
 })
-
-
-
