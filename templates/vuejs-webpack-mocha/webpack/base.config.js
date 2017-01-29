@@ -2,10 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const pkg = require('../package.json')
 
-const env = {
-  NODE_ENV: process.env.NODE_ENV || 'development',
-  VERSION: pkg.version
-}
+const env = process.env.NODE_ENV || 'development'
 
 module.exports = {
   entry: './app/main.js',
@@ -35,10 +32,14 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify(env),
+      'process.env': {
+        NODE_ENV: JSON.stringify(env),
+        VERSION: JSON.stringify(pkg.version),
+      },
     }),
   ],
-  devtool: 'eval',
+  // https://webpack.js.org/configuration/devtool/
+  devtool: 'eval-cheap-module-source-map',
 }
 
 console.log('App Version: ', env.VERSION)

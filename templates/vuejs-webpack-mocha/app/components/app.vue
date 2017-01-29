@@ -1,22 +1,23 @@
 <template>
-    <div>
-        <h1>{{message}}</h1><h2>test</h2>
-    </div>
+  <div>
+    <h1>{{message}}</h1>
+    <h2>test</h2>
+  </div>
 </template>
 
 <script>
-import Home from './home/home'
-export default {
+  import Home from './home/home'
+  export default {
     components: {
-        Home,
+      Home,
     },
     data() {
-        return {
-            message: 'Hello from VueJS'
-        }
+      return {
+        message: 'Hello from VueJS'
+      }
     },
-    created () {
+    created() {
       // console.log('i am created')
     }
-}
+  }
 </script>

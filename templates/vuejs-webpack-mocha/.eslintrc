@@ -1,10 +1,9 @@
 {
-    "extends": "standard",
-    "env": {
-        "mocha": true
-    },
-    "rules": {
-        // "indent": [2, 4],
-        "comma-dangle": ["error", "always-multiline"]
-    }
+  "extends": "standard",
+  "env": {
+    "mocha": true
+  },
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"]
+  }
 }
