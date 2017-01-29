@@ -21,7 +21,7 @@
     + [Chrome](https://www.google.com/chrome/)
     + Optional but usefull
         * [Yarn](https://yarnpkg.com/)
-        * Improved terminal ([iTerm](https://www.iterm2.com/), [cmdr](http://cmder.net/) + bash)
+        * Improved terminal/command window ([iTerm](https://www.iterm2.com/), [cmdr](http://cmder.net/) + bash)
 
 # Content
 

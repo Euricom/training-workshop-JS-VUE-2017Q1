@@ -120,15 +120,7 @@ More config: [http://eslint.org/docs/user-guide/configuring](http://eslint.org/d
 
 ### ESLint with 'Standard' JavaScript Style Guide
 
-One JavaScript Style Guide to Rule Them All. No decisions to make. No .eslintrc, .jshintrc, or .jscsrc files to manage. It just works.
-
-    // install (cli)
-    npm install standard
-
-    // VSCode plugin
-    https://marketplace.visualstudio.com/items/chenxsan.vscode-standardjs
-
-Alternatively you can setup the standardjs with eslint
+One JavaScript Style Guide to Rule Them All.
 
     // install
     npm install eslint eslint-config-standard eslint-plugin-standard eslint-plugin-promise --save-dev
@@ -191,7 +183,7 @@ But even after installing a preset, you need to tell Babel to use it.
     `babel-preset-env`: ES support for specified browsers (dynamic)
     `babel-preset-react`: Adds support for jsx and flow
     `babel-preset-babili`: Adds ES6 minifier
-    `babel-preset-stage-2`: Adds all ES features in stage 2 (and greater)
+    `babel-preset-stage-2`: Adds all ES features in stage 2 (and higher)
     `babel-preset-angular2`: Wite Angular2 in Javascript
     ...
 
@@ -271,30 +263,6 @@ For Map, Set, Object.xxx, ...
     import 'core-js/es6/array';
     ...
     import 'core-js/es7/reflect';
-```
-
-----
-
-## Enable NS.Next features in your ESLint
-
-Install
-
-```
-    # install
-    npm install eslint
-    npm install babel-eslint
-```
-
-Config
-
-```json
-    {
-        "extends": "airbnb-base",
-        "parser": "babel-eslint",
-        "rules": {
-            ...
-        }
-    }
 ```
 
 ----
@@ -954,13 +922,14 @@ car.value = -1;             <- ERROR
 
 ----
 
-## Spread operator
+## Spread operator (arrays)
 
 ```js
     function volume(width, length, height) {
         return width * length * height;
     };
 
+    // using array spread operator
     console.log(volume(...[2, 8, 5]));
 ```
 
@@ -1196,10 +1165,11 @@ Euhhhh, way?
 
 ```js
     // ES5
-    const promiseFunc = () => new Promise((resolve) => {
-        fetchSomething().then(result => {
-            resolve(result + ' 2');
-        });
+    const promiseFunc = function () {
+        return fetchSomething()
+            .then(result => {
+                return (result + ' 2');
+            });
     });
 
     // ES7
@@ -1257,10 +1227,13 @@ Note: It is supported by TypeScript 1.7+
 
 ```js
     // Array destructuring: uses an iterator to get to the elements of a source
-    let [x, ...y] = 'abc';   // x='a'; y=['b', 'c']
+
+    var [first, second] = [1234, 9090];   // first = 1234, second = 9090
+
+    let [x, ...y] = 'abc';                // x='a'; y=['b', 'c']
 ```
 
-Combines desctructering with spread operator
+Often used in Promise.all
 
 ```js
     // ES5 - Result of multiple promises
@@ -1315,11 +1288,8 @@ Tagged templates
 
 ```js
     const id = 1;
-    const query = graphql `
-        query {
-            user(id: ${id})
-        }
-    `
+    const name = 'peter'
+    const query = dump `The user: ${id} -${name}`
 
     function grahql(literals, ...placeholders) {
       console.log('literals', literals);

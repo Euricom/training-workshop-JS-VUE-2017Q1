@@ -37,7 +37,7 @@ Copyright (c) 2017 Euricom nv.
 
 ----
 
-## Ecmascript 3
+## Ecmascript
 
 - 1996: Microsoft is comming with IE. Netscape in problem.
 - 1997: Netscape reches out to Ecma. JS was standardized: Ecmascript
@@ -69,10 +69,27 @@ Copyright (c) 2017 Euricom nv.
     + TC39 agree to postpone ES4 and to implement ES3.1 (and rename to ES5)
     + Commitee is working together now. New features set: Harmony
 - 2009: ES5 is official
+- 2015: TC39 has finalized ES6
+    + Renamed ES6 to ES2015
 - Today:
-    + TC39 has finalized ES6
-    + TC39 works on features for ES7/ES8
-    + Browsers are inplementing ES6 and beyond
+    + TC39 works on features for ES2016 / ES2017
+    + Browsers are inplementing ES2015 and beyond
+
+---
+
+# Documentation
+
+> Where are the manual's
+
+----
+
+# Javascript Help
+
+## [The MDN JavaScript reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
+
+## [DevDocs](http://devdocs.io/javascript)
+
+## [JavaScript Weekly](http://javascriptweekly.com/)
 
 ---
 
@@ -105,31 +122,6 @@ Download links
 
 ----
 
-## Run your code
-
-Your JS file
-
-    // main.js
-    console.log('Hello node');
-
-To run
-
-    $ node main
-    Hello node
-
-To auto restart after file change
-
-    $ npm install nodemon -g
-    $ nodemon main.js
-    [nodemon] 1.9.2
-    [nodemon] to restart at any time, enter `rs`
-    [nodemon] watching: *.*
-    [nodemon] starting `node main.js`
-    Hello node
-    [nodemon] clean exit - waiting for changes before restart
-
-----
-
 ### Multiple node versions
 
 OSX
@@ -155,40 +147,69 @@ https://github.com/coreybutler/nvm-windows/releases
 Switch node by project
 
     // install
-    $ npm install -g avn avn-nvm (or avn-n)
+    $ npm install -g avn avn-nvm
     $ avn setup
     $ echo '4.4.5' > ./myproject/.node-version
 
     // use
     $ cd /myproject
 
----
+----
 
-# Use Strict
+## Run your code
 
-> A better javascript
+Your JS file
+
+    // main.js
+    console.log('Hello node');
+
+To run
+
+    $ node main
+    Hello node
+
+To auto restart after file change
+
+    $ npm install nodemon -g
+    $ nodemon main.js
+    [nodemon] 1.9.2
+    [nodemon] to restart at any time, enter `rs`
+    [nodemon] watching: *.*
+    [nodemon] starting `node main.js`
+    Hello node
+    [nodemon] clean exit - waiting for changes before restart
 
 ----
 
-## Strict
+## Node != Browser
 
-The syntax, for declaring [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode), was designed to be compatible with older versions of JavaScript. <small>Strict mode was introduced in ES5.</small>
+Node doesn't have:
 
 ```
-"use strict";
-var a = '1234';
-console.log(b);         // error
+    + window object
+    + location object
+    + document object
 ```
 
-Not Allowed to:
-- Using a variable/object without declaring it
-- Deleting a variable
-- Writing to a read only property
-- With statement
-- Keywords: interface, private, yield, ...
-- ...
+Node is/has:
 
-> ***Guideline***: always 'use strict' when using Javascript
+```
+    + global object (== window object)
+    + headless (no DOM)
+    + process object (to get info about the process)
+    + __dirname & __filename object
+
+    + module object (to export a module)
+    + everything is a module (every file)
+    + required function (to load other modules)
+```
+
+In common with browser:
+
+```
+   + console object
+   + setInterval & setTimeout function
+```
 
 ---
 
@@ -240,7 +261,7 @@ Answer!
     }
 
     bar();
-    name;           // undefined (none strict)
+    name;           // undefined
     foo;            // 'bar'
     bam;            // 'yay'
     baz();          // Error!
@@ -251,8 +272,6 @@ Answer!
 ----
 
 ## Variable Hoisting
-
-What the value of?
 
 ```javascript
 a;              // ???
@@ -274,9 +293,30 @@ b;              // undefined
 a = b;
 b = 2;
 b;              // 2
-a;              // 2
+a;              // undefined
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
+
+----
+
+## Strict
+
+The syntax, for declaring [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode), was designed to be compatible with older versions of JavaScript. <small>Strict mode was introduced in ES5.</small>
+
+```
+"use strict";
+var a = '1234';
+console.log(b);         // error
+```
+
+Not Allowed to:
+- Using a variable/object without declaring it
+- Deleting a variable
+- With statement
+- Keywords: interface, private, yield, ...
+- ...
+
+***Guideline***: always 'use strict' when using Javascript
 
 ----
 
@@ -561,6 +601,7 @@ Array
 
 This works!
 The reference to the array is const, not the array itself
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ----
 
@@ -626,6 +667,94 @@ Is used to isolate from global scope
 
 > The IIFE was (in ES5) the standard way to build libraries
 
+----
+
+### The Revealing Module Pattern
+
+```js
+var myRevealingModule = (function () {
+    var privateVar = "Ben Cherry",
+
+    function privateFunction() {
+        console.log( "Name:" + privateVar );
+    }
+
+    function publicSetName( strName ) {
+        privateVar = strName;
+    }
+
+    function publicGetName() {
+        privateFunction();
+    }
+```
+```js
+    // Reveal public pointers to
+    // private functions and properties
+    return {
+        setName: publicSetName,
+        greeting: publicVar,
+        getName: publicGetName
+    };
+})();
+
+myRevealingModule.setName( "Paul Kinlan" );
+```
+
+See also [JavaScript Design Patterns](https://addyosmani.com/resources/essentialjsdesignpatterns/book/)
+
+----
+
+### Javascript modules systems
+
+- IIFE (Revealing Module Pattern)
+- CommonJS (Node module pattern)
+- AMD (Asynchronous Module Definition)
+- UMD (Combination of IIFE, CommonJS, AMD)
+- ES6 Modules (ECMAScript Module Pattern)
+
+CommonJS
+
+```
+// myLib.js
+module.exports = {
+    setName: function() {
+    }
+}
+
+// main.js
+const myLib = require('./mylib.js');
+myLib.setName();
+```
+
+---
+
+# Exercise
+
+> Build a calculator module and use it
+
+- Use index.html, main.js & calc.js
+- Isolate the calculator with an iffe
+- HTML Tips
+
+```html
+    <input type="text" id="val1">
+    <input type="text" id="val2">
+    <button id="myBtn">Add</button>
+```
+
+```
+    // response to button click
+    document.getElementById("myBtn").addEventListener("click", function() {
+        var val1 = document.getElementById('val1').value;
+        var val2 = document.getElementById('val2').value;
+
+        // Add your code here
+
+        console.log(result)
+    }
+});
+```
+
 ---
 
 # this
@@ -672,6 +801,10 @@ o3.foo();       // ???
 
 Result
 <!-- .element: class="fragment" data-fragment-index="1" -->
+
+The 'this' points to the object it is called from (its context), if there is no object fallback to the global (window in browser).
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
 
 ```javascript
 foo();          // 'bar1' default binding (none strict)
@@ -727,9 +860,19 @@ var obj = { bar: 'bar2' };
 var a = [5,6,7];
 
 foo(1,2);                // 'bar1', 1, 2
+
+// Call the function and explicit pass the this.
 foo.call(obj, 1, 2);     // 'bar2', 1, 2
 foo.apply(obj, a);       // 'bar2', 5, 6
 ```
+
+[Function.prototype.call()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call)
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
+[Function.prototype.apply()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
 ----
 
@@ -759,6 +902,10 @@ var car = {
 }
 ```
 
+[Function.prototype.bind()](https://developer.mozilla.org/nl/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+
+<!-- .element: class="fragment" data-fragment-index="1" -->
+
 ----
 
 ### This - `new` keyword
@@ -775,7 +922,7 @@ user.name;          // 'peter'
 Following is happening:
 
 - A new object is created
-- (The __proto__ property is set to the function prototype)
+- (The `__proto__` property is set to the function prototype)
 - The `this` point to the newly created object
 - The constructor function is executed
 - The newly created object is returned (except when the constuctor returns none null);
@@ -818,6 +965,28 @@ So to know the value of `this`:
 - Was the function called with `call` or `apply` specifying an explicit `this`?
 - Was the function called via a containing/owing object (context)?
 - Default: global object or undefined (strict mode)
+
+---
+
+# Exercise
+
+```js
+var fullname = 'John Doe';
+var obj = {
+   fullname: 'Colin Ihrig',
+   prop: {
+      fullname: 'Aurelio De Rosa',
+      getFullname: function() {
+         return this.fullname;
+      }
+   }
+};
+var test = obj.prop.getFullname;
+console.log(test());
+```
+
+Make the console.log() prints 'Aurelio De Rosa'.<br>
+Don't change the obj!
 
 ---
 
@@ -864,7 +1033,41 @@ foo();          // 'bar'
 
 ----
 
-## Closure exercise 1
+## Reveiling Module Pattern (again)
+
+```javascript
+"use strict";
+
+// myLib.js
+var myLib = (function() {
+
+```
+```js
+    // private data
+    var data = {
+        bar: 'bar'
+    };
+
+```
+```js
+    // private function
+    function privateBar() {
+        // there is a closure to the private data object
+        console.log(data.bar)
+    }
+
+```
+```js
+    // public api
+    return {
+        bar: privateBar,
+    }
+})();
+```
+
+---
+
+# Exercise
 
 What is the output of the following function?
 
@@ -888,116 +1091,15 @@ Answer:
 ```
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
-----
-
-## Closure exercise 1
-
-```javascript
-    for(var i = 0; i <= 5; i++) {
-        setTimeout(function() {
-            console.log('i: ' + i);
-        }, i*1000)
-    }
-```
-
 Refactor function to provide following (expected) output
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
     i: 1
     i: 2
     i: 3
     i: 4
     i: 5
-
-Solution can be different in ES5 & ES6
-
-----
-
-## Closure exercise 1 - solution
-
-Solution ES5:
-
-```javascript
-    for(var i = 0; i <= 5; i++) {
-        (function(cnt) {
-            setTimeout(function() {
-                console.log('i: ' + cnt);
-            }, cnt*1000)
-        })(i);
-    }
-```
-
-Solution ES6:
-
-```javascript
-    for(let i = 0; i <= 5; i++) {
-        setTimeout(() => {
-            console.log('i: ' + i);
-        }, i*1000)
-    }
-```
-
-----
-
-## Classis Module Pattern
-
-```javascript
-"use strict";
-
-// myLib.js
-var myLib = (function() {
-
-    // private data
-    var data = {
-        bar: 'bar'
-    };
-
-    // private function
-    function privateBar() {
-        console.log(data.bar)
-    }
-
-    // public api
-    return {
-        bar: privateBar,
-    }
-})();
-```
-
-```html
-// index.html
-<script scr="./myLib.js"></script>
-<script scr="./main.js"></script>
-```
-
-```javascript
-// main.js
-myLib.bar();    // myLib is a global var
-```
-
-----
-
-## ES6 Module pattern
-
-myLib.js
-
-```javascript
-// private data
-var data = {
-    bar: 'bar'
-};
-export function bar() {
-    console.log(data.bar)
-}
-```
-
-main.js
-```javascript
-import myLib from './myLib';
-
-myLib.bar();    // myLib is a local for this file
-```
-
-> ES6 modules are in strict mode by default
+<!-- .element: class="fragment" data-fragment-index="2" -->
 
 ---
 
@@ -1045,7 +1147,7 @@ Object.defineProperty(person, 'firstName', {
 
 ## Prototypes
 
-In fact, JavaScript objects also have one additional attribute: a pointer to another object. We call this pointer the object's prototype.
+In fact, JavaScript objects also have one additional attribute: a pointer to another object. We call this pointer the object's prototype: `__proto__`
 
 ```javascript
 var dev = Object.create(null);
@@ -1056,8 +1158,16 @@ var peter = Object.create(dev);
 console.log(peter.role);    // 'dev'
 peter.code();               // 'writing code'
 
-console.log(Object.getPrototypeOf(yehuda));  // returns the dev object
+console.log(Object.getPrototypeOf(peter));  // returns the dev object
 ```
+
+`__proto__` points the actual object that is used in the lookup chain to resolve properties, methods, etc. Internally know as `[[Prototype]]`
+
+```javascript
+console.log(peter.__proto__);                          // points to Object
+Object.getPrototypeOf(peter) === peter.__proto__);     // true
+```
+
 
 ----
 
@@ -1086,12 +1196,6 @@ The default `Object.prototype` dictionary comes with a number of the methods we 
 person.toString() // "[object Object]"
 ```
 
-`__proto__` points the actual object that is used in the lookup chain to resolve properties, methods, etc. Internally know as `[[Prototype]]`
-
-```javascript
-console.log(person.__proto__);                          // points to Object
-Object.getPrototypeOf(person) === person.__proto__);    // true
-```
 
 ----
 
@@ -1100,7 +1204,7 @@ Object.getPrototypeOf(person) === person.__proto__);    // true
 > Remember what the new keyboard did
 
 - A new object is created
-- *** --> The __proto__ property is set to the function prototype   <--- ***
+- *** --> The `__proto__` property is set to the function prototype***
 - The `this` point to the newly created object
 - The constructor function is executed
 - The newly created object is returned (except when the constuctor returns none null);
@@ -1195,8 +1299,7 @@ manager.identity();
 
 ## ES6 Classes vs prototype
 
-The Person/Manager inheritance but now in ES6
-(now with classes)
+The Person/Manager inheritance but with classes (ES6)
 
 ```javascript
 class Person {
