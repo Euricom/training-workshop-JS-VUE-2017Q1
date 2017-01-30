@@ -12,10 +12,10 @@ export class Car {
         this.value -= value
     }
 
-    set value (value) {
-        if (value < 0)
+    set carValue (carValue) {
+        if (carValue < 0)
             throw new Error('invalid value')
-        this.value = value
+        this.value = carValue
     }
 
     delayLogName (timeout = 100) {
@@ -34,7 +34,7 @@ export class Car {
 
     start(callback) {
         return new Promise(resolve => {
-            engine.start(resolve);
+            engine.start(resolve)
         })
     }
 
@@ -45,8 +45,8 @@ import { Car } from './car'
 
 const value = 50000
 var car = new Car({
-    make,
+    make: 'Bmw',
     model: '520',
-    value
+    value,
 })
 
