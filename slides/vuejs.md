@@ -461,75 +461,6 @@ More: https://vuejs.org/v2/guide/events.html#Event-Modifiers
 
 - Look for 3 solutions
 
-----
-
-## Exercise - Solution 1
-
-v-if
-
-```html
-<span v-if="showText">
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-    Aenean commodo ligula eget dolor. Aenean massa.
-</span>
-<button @click="onToggle()">Toggle text</button>
-```
-
-and onToggle method
-
-```js
-{
-    data () {
-        return {
-            showText: true,
-        }
-    },
-    methods: {
-        onToggle () {
-            this.showText = !this.showText
-        },
-    },
-}
-```
-
-----
-
-## Exercise - Solution 2/3
-
-v-show
-
-```html
-<span v-show="showText">
-    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-    Aenean commodo ligula eget dolor. Aenean massa.
-</span>
-<button @click="showText = !showText">Toggle text</button>
-```
-
-:class
-
-```html
-<head>
-    <style>
-        .hidden {
-            display: none;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="root">
-        <span :class="{ hidden: !showText }">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-            Aenean commodo ligula eget dolor. Aenean massa.
-        </span>
-        <button @click="showText = !showText">Toggle text</button>
-    </div>
-    ...
-</body>
-```
-
-
 ---
 
 # Components
@@ -540,7 +471,7 @@ v-show
 
 ## What are components
 
-It's like a WebComponent without any polyfill.
+Re-usable UI components: like extending your html
 
 ```js
 // Extend Vue to get a reusable constructor
@@ -605,6 +536,19 @@ And use it
 
 ## Custom attributes: props
 
+I want to set my title on the component
+
+```html
+    <div id="root">
+        <my-component title="My Component Title" sub-title="bla bla bla">
+            <span> Add some text here </span>
+        </my-component>
+    </div>
+
+```
+
+In code
+
 ```js
 var MyComponent = Vue.extend({
     props: [
@@ -619,15 +563,6 @@ var MyComponent = Vue.extend({
         </div>
     `
 })
-```
-
-```html
-    <div id="root">
-        <my-component title="My Component Title" sub-title="bla bla bla">
-            <span> Add some text here </span>
-        </my-component>
-    </div>
-
 ```
 
 More https://vuejs.org/v2/guide/components.html#Prop-Validation
