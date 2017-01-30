@@ -243,7 +243,7 @@ Setup
 
 ```bash
 # install
-npm install webpack-dev-server@2.2.0-rc.0 --save-dev
+npm install webpack-dev-server@2.2.0 --save-dev
 ```
 
 ```json
@@ -427,42 +427,42 @@ require("./style.css");
 
 ----
 
-## Add SASS support
+## Add LESS support
 
 Install loader (and dependencies):
 
 ```bash
-npm install sass-loader node-sass --save-dev
+npm install less-loader less --save-dev
 ```
 
 Add the rule in your webpack.config.js
 
 ```js
-{ test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader' }
+{ test: /\.less$/, loader: 'style-loader!css-loader!less-loader' }
 ```
 
 ----
 
-## Add SASS support
+## Add LESS support
 
-rename your css to sass
+rename your css to less
 
 ```bash
-mv style.css style.scss
+mv style.css style.less
 ```
 
 require (or import) your scss file
 
 ```js
-require("./style.scss");
+require("./style.less");
 ```
 
-and write some sass code
+and write some less code
 
 ```css
-$primary-color: LightGray;
+@primary-color: LightGray;
 body {
-    background: $primary-color;
+    background: @primary-color;
 }
 ```
 
@@ -494,13 +494,6 @@ Injected variable into our javascript code:
 
 ```js
 const webpack = require('webpack')
-const pkg = require('./package.json')
-
-const env = {
-  NODE_ENV: process.env.NODE_ENV || 'dev',
-  VERSION: pkg.version,
-  BUILD_DATE: Date.now(),
-}
 ```
 
 ```js
@@ -511,8 +504,10 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-          'process.env': JSON.stringify(env)
-        })
+            'process.env': {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+            },
+        }),
     ]
 };
 ```
@@ -538,7 +533,7 @@ plugins: [
       }
     }),
 
-    // minimize other files (css, ...)
+    // minimize other files (css, ...), here for webpack 1.x plugins
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
@@ -643,12 +638,12 @@ module.exports = {
     ...
     module: {
         rules: [
-            // {  test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader' }
+            // {  test: /\.scss$/, loader: 'style-loader!css-loader!less-loader' }
             {
-                test: /\.scss$/,
+                test: /\.less$/,
                 loader: ExtractTextPlugin.extract({
                     fallbackLoader: "style-loader",
-                    loader: "css-loader!sass-loader"
+                    loader: "css-loader!less-loader"
                 })
             }
         ]
@@ -735,7 +730,7 @@ And your icon is on your page!
 }
 ```
 
-Restart webpack-dev-server and thats all. Try to change a css/sass file
+Restart webpack-dev-server and thats all. Try to change a css/less file
 
 > Hot module replacement doesn't work together with the 'ExtractTextPlugin' plugin.
 
