@@ -103,7 +103,7 @@ Copyright (c) 2017 Euricom nv. Licensed under the [MIT license](https://opensour
     * Testing components
 + Questions & Answers
 
-----
+---
 
 # Prerequisites
 
