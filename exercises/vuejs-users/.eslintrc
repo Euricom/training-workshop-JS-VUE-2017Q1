@@ -1,0 +1,14 @@
+{
+  "extends": ["vue", "airbnb-base"],
+  "plugins": ["vue"],
+  "globals": {},
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "no-console": [0, ""],  // allow console.log
+    "semi": [2, "never"]    // no semicolon
+    // "indent": [2, 4]     // tab = 4 spaces
+  }
+}
