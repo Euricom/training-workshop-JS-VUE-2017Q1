@@ -8,12 +8,13 @@
         .hidden {
             display: none;
         }
+        [v-cloak] { display:none; }
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
-    <div id="root" class="container">
+    <div id="root" class="container" v-cloak>
         
         <h1>{{message}}</h1>
 
@@ -30,9 +31,15 @@
         <!-- exercise: alert box -->
 
         <alert @closed="onClosed()">
-            <strong>Alert: </strong> We have a problem.
+            {{alertMessage}}
         </alert>
-
+        <alert type="info">
+            You are doing good
+        </alert>
+        <button v-if="!alertMessage" @click="onShowAlert()">Show Alert Again</button>
+        
+        <hr>
+        
         <!-- exercise: translate directive -->
         
         <button @click="setLang('nl')">NL</button>
@@ -43,6 +50,7 @@
 
     <script src="https://unpkg.com/vue@2.1.10/dist/vue.js"></script>
     <script src="./translate.js"></script>
+    <script src="./alert.js"></script>
     <script src="./main.js"></script>
 </body>
 

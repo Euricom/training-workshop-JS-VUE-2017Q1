@@ -156,7 +156,7 @@ Serving "/Users/me/git/vue-webpack" at http://127.0.0.1:8080
 
 ```js
 // ./userService.js
-export function userService() {
+function UserService() {
     this.getById = function(id) {
         return { id: 123, name: 'peter' }
     }
@@ -167,14 +167,16 @@ export function userService() {
         ]
     }
 }
+
+export default new UserService()
 ```
 
 ```js
 // ./main.js
-import { userService } from './userService';
-var users = userService.getAll();
+import userService from './userService'
+var users = userService.getAll()
 users.forEach(function(user) {
-    console.log(user.id, user.name);
+    console.log(user.id, user.name)
 });
 ```
 
@@ -200,12 +202,11 @@ and use it
 
 ```js
 // main.js
-var userService = require('./userService');
-var $ = require('jquery');
-
-var users = userService.getAll();
+import $ from 'jquery';
+import userService from './userService'
+var users = userService.getAll()
 users.forEach(function(user) {
-    $('#list').append('<li>' + user.name + '</li>');
+    $('#list').append(`<li>${user.name}</li>`);
 });
 ```
 

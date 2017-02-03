@@ -4,12 +4,13 @@
   "description": "WebPack Template",
   "scripts": {
     "serve": "webpack-dev-server --open --inline --hot",
-    "serve:db": "webpack-dashboard -- webpack-dev-server --open --inline --hot",
     "build": "cross-env NODE_ENV=production webpack"
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
@@ -29,7 +30,6 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "2.2.0",
-    "webpack-dashboard": "^0.2.1",
     "webpack-dev-server": "2.2.0",
     "webpack-merge": "^2.4.0"
   }
