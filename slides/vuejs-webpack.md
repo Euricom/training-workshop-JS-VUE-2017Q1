@@ -7,6 +7,39 @@
 Copyright (c) 2017 Euricom nv.
 </small>
 
+<hr>
+
+Note: TOC
+
+<!-- TOC -->
+
+- [VueJS - WebPack](#vuejs---webpack)
+- [Vue Component Spec](#vue-component-spec)
+    - [.vue file](#vue-file)
+- [Setup](#setup)
+    - [Index.html](#indexhtml)
+    - [Vue App and component](#vue-app-and-component)
+    - [WebPack & Npm Modules](#webpack--npm-modules)
+    - [Optional](#optional)
+- [Components](#components)
+    - [Register components](#register-components)
+    - [.vue Component](#vue-component)
+    - [Template Based Component (ES6)](#template-based-component-es6)
+- [Styling](#styling)
+    - [Styling in .vue file](#styling-in-vue-file)
+    - [Scoped styling](#scoped-styling)
+    - [Less](#less)
+    - [Webpack Extract CSS](#webpack-extract-css)
+- [Exercise](#exercise)
+    - [Application structure](#application-structure)
+- [ESLint your vue files](#eslint-your-vue-files)
+    - [Setup](#setup-1)
+    - [Setup - VSCode](#setup---vscode)
+- [Exercise (large)](#exercise-large)
+- [Resources](#resources)
+
+<!-- /TOC -->
+
 ---
 
 # Vue Component Spec
@@ -43,7 +76,6 @@ $primary-color: #333;
 .example {
     font: 100% $font-stack;
     color: $primary-color;
-}
 </style>
 ```
 
@@ -324,15 +356,27 @@ npm install less-loader less --save-dev
 
 Specify less as language
 
-```html
+```less
 <!-- message.vue -->
 <style lang="less">
+@import "~bootstrap/dist/css/bootstrap.css";
+@import (reference) "../variable.less"
 @alert-color: red
 h1 {
     color: @alert-color
 }
 </style>
 ```
+
+Now you can use:
+
+- Variables
+- Import other files
+- And all other nifty less features
+
+<small>
+[Learn LESS in 10 Minutes](http://tutorialzine.com/2015/07/learn-less-in-10-minutes-or-less/)
+</small>
 
 ----
 
@@ -454,7 +498,30 @@ Setup script: package.json
 },
 ```
 
-> Linting vue files doesn't work in VSCode!
+> VSCode need an additional setup!
+
+----
+
+## Setup - VSCode
+
+settings.json
+
+```json
+// linting vue files
+"files.associations": {
+    "*.vue": "vue"
+},
+"eslint.options": {
+    "extensions": [".js", ".vue"]
+},
+"eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    "vue"
+],
+
+```
 
 ---
 

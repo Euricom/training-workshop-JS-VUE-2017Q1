@@ -6,7 +6,7 @@ import './sample.less'
 export default Vue.extend({
   template,
   name: 'sample',
-  data () {
+  data() {
     return {
       title: 'My awesome component',
     }

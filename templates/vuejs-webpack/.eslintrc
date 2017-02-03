@@ -1,7 +1,17 @@
 {
-  "extends": ["vue", "standard"],
+  "extends": ["vue", "airbnb-base"],
   "plugins": ["vue"],
+  "globals": {},
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "rules": {
-    "comma-dangle": ["error", "always-multiline"]
+    "no-console": [0, ""],  // allow console.log
+    "semi": [2, "never"]    // no semicolon
+    // "indent": [2, 4]     // tab = 4 spaces
   }
 }
+
+
+

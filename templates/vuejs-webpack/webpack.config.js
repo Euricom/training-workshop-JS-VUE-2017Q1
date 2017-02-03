@@ -1,6 +1,6 @@
 const env = process.env.NODE_ENV || 'development'
 
-function config () {
+function config() {
   switch (env) {
     case 'production':
     case 'prod':
@@ -14,4 +14,5 @@ function config () {
   }
 }
 
+// eslint-disable-next-line
 module.exports = require(`./webpack/${config()}.config.js`)

@@ -7,17 +7,15 @@
 <script>
   export default {
     name: 'message',
-    data() {
-      return {
-        message: 'Hello from messsage'
-      }
-    },
+    data: () => ({
+      message: 'Hello from messsage',
+    }),
   }
 </script>
 
 <style lang="less" scoped>
 @color-alert: red;
 h1 {
-  color: @color-alert
+  color: @color-alert;
 }
 </style>

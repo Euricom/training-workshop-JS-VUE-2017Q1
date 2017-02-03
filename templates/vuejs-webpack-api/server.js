@@ -1,12 +1,13 @@
-var express = require('express')
-var morgan = require('morgan')
-var path = require('path')
-var bodyParser = require('body-parser')
-var _ = require('underscore')
-var faker = require('faker')
+const express = require('express')
+const morgan = require('morgan')
+const path = require('path')
+const bodyParser = require('body-parser')
+const _ = require('underscore')
+
+const seed = require('./seed')
 
 // app setup
-var app = express()
+const app = express()
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({
   extended: true,
@@ -14,23 +15,39 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')))
 
+//
 // setup users
-var users = [
-  { id: 1, name: 'peter', role: 'admin' },
-  { id: 2, name: 'jan', role: 'user' },
+//
+let users = [
+  { id: 1, firstName: 'john', latName: 'bar', email: 'john.bar@noreply.com' },
+  { id: 2, firstName: 'jane', latName: 'zoe', email: 'jane.zoer@noreply.com' },
 ]
-users = generateUsers(50)
-console.log(users)
+users = seed.generateUsers(50)
+// console.log(users)
 
+//
 // routes
-app.get('/api/users', (req, res, next) => {
+//
+
+// GET /api/users
+// GET /api/users?page=0&pageSize=10
+app.get('/api/users', (req, res) => {
+  console.log(req.query.page, req.query.pageSize)
+  const page = req.query.page || 0
+  const pageSize = req.query.pageSize || 10
+
+  const userSet = _.chain(users).rest(page * pageSize).first(pageSize).value()
   // return all resource
-  res.send(users)
+  res.send({
+    total: userSet.length,
+    users: userSet,
+  })
 })
 
-app.get('/api/users/:id', (req, res, next) => {
+// GET /api/users/12
+app.get('/api/users/:id', (req, res) => {
   // find user
-  var user = _.findWhere(users, { id: +req.params.id })
+  const user = _.findWhere(users, { id: +req.params.id })
   if (!user) {
     return res.send(404, 'not found')
   }
@@ -39,9 +56,18 @@ app.get('/api/users/:id', (req, res, next) => {
   return res.send(user)
 })
 
-app.post('/api/users', (req, res, next) => {
+/* POST /api/users
+{
+  "firstName": "peter",
+  "lastName": "cosemans",
+  "age": 52,
+  "email": "peter.cosemans@gmail.com",
+  "role": "admin"
+}
+*/
+app.post('/api/users', (req, res) => {
   // Get resource
-  var resource = req.body
+  const resource = req.body
 
   // Assign number
   resource.id = new Date().valueOf()
@@ -53,12 +79,21 @@ app.post('/api/users', (req, res, next) => {
   res.status(200).send(resource)
 })
 
-app.put('/api/users/:id', (req, res, next) => {
+/* PUT /api/users/12
+{
+  "firstName": "peter",
+  "lastName": "cosemans",
+  "age": 52,
+  "email": "peter.cosemans@gmail.com",
+  "role": "admin"
+}
+*/
+app.put('/api/users/:id', (req, res) => {
   // Get resource
-  var resource = req.body
+  const resource = req.body
 
   // Find and update
-  var user = _.findWhere(users, { id: Number(req.params.id) })
+  const user = _.findWhere(users, { id: Number(req.params.id) })
   if (!user) {
     return res.send(404, 'not found')
   }
@@ -68,8 +103,9 @@ app.put('/api/users/:id', (req, res, next) => {
   return res.status(200).send(user)
 })
 
-app.delete('/api/users/:id', (req, res, next) => {
-  var user = _.findWhere(users, { id: Number(req.params.id) })
+// DELETE /api/users/12
+app.delete('/api/users/:id', (req, res) => {
+  const user = _.findWhere(users, { id: Number(req.params.id) })
   if (!user) {
     return res.status(204)
   }
@@ -78,39 +114,10 @@ app.delete('/api/users/:id', (req, res, next) => {
   return res.status(200).send(user)
 })
 
+//
 // listen for requests
-var port = process.env.PORT || 3000
-var server = app.listen(port, function () {
+//
+const port = process.env.PORT || 3000
+const server = app.listen(port, () => {
   console.log(`Express server listening on port: ${server.address().port}`)
 })
-
-function generateUsers (count) {
-  const users = []
-  for (var i = 0; i < count; i++) {
-    var firstName, imageUrl
-    var random = faker.Helpers.randomNumber(2)
-    if (random === 1) {
-      firstName = faker.Name.firstNameFemale()
-      imageUrl = `http://api.randomuser.me/portraits/women/${faker.Helpers.randomNumber(100)}.jpg`
-    } else {
-      firstName = faker.Name.firstNameMale()
-      imageUrl = `http://api.randomuser.me/portraits/men/${faker.Helpers.randomNumber(100)}.jpg`
-    }
-    var lastName = faker.Name.lastName()
-    users.push({
-      firstName: firstName,
-      lastName: lastName,
-      age: faker.Helpers.randomNumber(100),
-      email: `${firstName}.${lastName}@${faker.Internet.domainName()}`.toLowerCase(),
-      image: imageUrl,
-      phone: faker.PhoneNumber.phoneNumber(),
-      company: faker.Image.imageUrl(),
-      address: {
-        street: faker.Address.streetName(),
-        city: faker.Address.city(),
-        zip: faker.Address.zipCode(),
-      },
-    })
-  }
-  return users
-}
