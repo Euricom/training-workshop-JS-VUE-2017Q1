@@ -22,7 +22,7 @@ module.exports = {
         email: `${firstName}.${lastName}@${faker.Internet.domainName()}`.toLowerCase(),
         image: imageUrl,
         phone: faker.PhoneNumber.phoneNumber(),
-        company: faker.Image.imageUrl(),
+        company: faker.Company.companyName(),
         address: {
           street: faker.Address.streetName(),
           city: faker.Address.city(),
