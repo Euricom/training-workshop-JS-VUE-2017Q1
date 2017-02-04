@@ -222,11 +222,11 @@ Vue.component('my-component', MyComponent)
 app.vue (local registration)
 
 ```js
-import Message from './components/message.vue'
+import MyComponent from './components/myComponent.vue'
 export default {
   components: {
     // list the components used in this component
-    Message,
+    MyComponent,
   },
   data () {
     ...
@@ -259,7 +259,7 @@ export default {
 </script>
 ```
 
-> Notice the name property
+> The name property over-rules
 
 ----
 
@@ -420,6 +420,38 @@ module.exports = {
 
 ---
 
+# Production
+
+> Optimize your build
+
+----
+
+## Optimize
+
+Use Webpack’s DefinePlugin to indicate a production environment, so that warning blocks can be automatically dropped by UglifyJS during minification.
+
+```js
+var webpack = require('webpack')
+module.exports = {
+  // ...
+  plugins: [
+    // ...
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ]
+}
+```
+
+---
+
 # Exercise
 
 > Refactor the bootstrap Alert component (from previous exercise) to a .vue component.
@@ -463,6 +495,56 @@ module.exports = {
 │        ├── helper.js
 │        ├── helper.spec.js
 │        └── ...
+```
+
+---
+
+# Loading data
+> Get the data from the backend
+
+----
+
+## Using fetch
+
+```js
+fetch('api/users')
+    .then(checkStatus)
+    .then(res => res.json())
+    .then(users => {
+        console.log(users)
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+function checkStatus(res) {
+    if (!res.ok) {
+        throw Error(res.statusText);
+    }
+    return res;
+}
+```
+
+> [Can I Use - Fetch](http://caniuse.com/#search=fetch)
+
+----
+
+## Using Axios
+
+```bash
+$ npm install axios
+```
+
+```js
+import axios from 'axios'
+
+axios.get('/user?ID=12345')
+    .then(res => {
+        console.log(res.data);
+    })
+    .catch(res => {
+        console.log(res.status, res.statusText);
+    });
 ```
 
 ---
@@ -546,4 +628,4 @@ settings.json
 
 - [Vue tooling for VSCode](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
 
-
+- [ES / TypeScript decorator for class-style Vue](https://github.com/vuejs/vue-class-component)

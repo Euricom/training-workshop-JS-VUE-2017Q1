@@ -9,6 +9,50 @@
 Copyright (c) 2017 Euricom nv.
 </small>
 
+Note: TOC
+
+<!-- TOC -->
+
+- [VueJS - Plugins](#vuejs---plugins)
+- [Routing](#routing)
+    - [Setup](#setup)
+    - [Routes](#routes)
+    - [Navigate](#navigate)
+    - [HTML5 History Mode](#html5-history-mode)
+    - [Router parameters](#router-parameters)
+    - [Access router from code](#access-router-from-code)
+    - [Navigation Guards](#navigation-guards)
+    - [Navigation Guards Sample](#navigation-guards-sample)
+- [VUEX](#vuex)
+    - [Centralized State Management](#centralized-state-management)
+    - [Setup](#setup-1)
+    - [The Basic Store](#the-basic-store)
+    - [The Basic Store](#the-basic-store-1)
+    - [A more practical setup](#a-more-practical-setup)
+    - [A more practical setup](#a-more-practical-setup-1)
+    - [Dispatch Multiple arguments](#dispatch-multiple-arguments)
+    - [Object state](#object-state)
+    - [Getters](#getters)
+    - [Getters - With Arguments](#getters---with-arguments)
+    - [Actions](#actions)
+    - [Actions](#actions-1)
+    - [Form handling](#form-handling)
+    - [Vuex Helpers](#vuex-helpers)
+    - [$state.commit](#statecommit)
+    - [The mapState helper](#the-mapstate-helper)
+    - [The mapGetters helper](#the-mapgetters-helper)
+    - [The mapMutations helper](#the-mapmutations-helper)
+    - [The mapActions helper](#the-mapactions-helper)
+    - [Typical use helpers](#typical-use-helpers)
+    - [Vuex Modules](#vuex-modules)
+    - [Vuex Modules sample](#vuex-modules-sample)
+    - [Application structure](#application-structure)
+    - [Vuex Plugins](#vuex-plugins)
+    - [Build in plugins](#build-in-plugins)
+- [Resources](#resources)
+
+<!-- /TOC -->
+
 ---
 
 # Routing
@@ -59,12 +103,28 @@ const router = new VueRouter({
   ]
 })
 
-const app = new Vue({
-  router
-}).$mount('#app')
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App),
+})
 ```
 
-Verify
+----
+
+## router-view
+
+Add the 'router-view' placeholder
+
+```html
+<template>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+</template>
+```
+
+And we are ready: verify
 
 [http://localhost:8080/#/foo](http://localhost:8080/#/foo)<br>
 [http://localhost:8080/#/bar](http://localhost:8080/#/bar)
@@ -115,7 +175,7 @@ Specify parameter with a colon
 
 ```js
 routes: [
-    { path: '/foo/:id', component: Foo }
+    { path: '/foo/:id?', component: Foo }
 ]
 ```
 
@@ -156,15 +216,15 @@ ready () {
 navigate
 
 ```js
-router.push('bar')
-router.push({ path: 'bar' })
-router.push({ path: 'foo', params: { id: 123 }})
+$router.push('bar')
+$router.push({ path: 'bar' })
+$router.push({ path: 'foo', params: { id: 123 }})
 
 // named (you have to specify a name on the route)
-router.push({ name: 'Foo', params: { id: 123 }})
+$router.push({ name: 'Foo', params: { id: 123 }})
 
 // go back
-router.go(-1)
+$router.go(-1)
 ```
 
 ----
@@ -256,23 +316,42 @@ Vue.use(Vuex)
 
 ----
 
-## The Simplest Store
+## The Basic Store
 
-Provide an initial state object, and some mutations:
+Provide an initial state object, some mutations and actions:
 
 ```js
 const store = new Vuex.Store({
     state: {
         count: 0
     },
+```
+```js
     mutations: {
         increment: state => state.count++,
         incrementBy: (state, n) => state.count += n,
     }
+```
+```js
+    actions: {
+        increment ({ commit }) {
+            // this will trigger the 'increment' mutation
+            commit('increment')
+        },
+        incrementBy ({ commit }, n) {
+            // this will trigger the 'incrementBy' mutation
+            // with argument 'n'
+            commit('incrementBy', n)
+        }
+    }
 })
 ```
 
-You can access the state object as store.state, and trigger a state change with the store.commit method
+----
+
+## The Basic Store
+
+You can access the state object as store.state, and trigger an action with the store.dispatch method
 
 ```js
 const app = new Vue({
@@ -284,10 +363,10 @@ const app = new Vue({
     },
     methods: {
         increment () {
-            store.commit('increment')
+            store.dispatch('increment')
         },
         incrementBy (n) {
-            store.commit('decrement', n)
+            store.dispatch('incrementBy', n)
         }
     }
 })
@@ -295,7 +374,7 @@ const app = new Vue({
 
 ----
 
-## A more practical use
+## A more practical setup
 
 The store
 
@@ -328,7 +407,7 @@ By providing the store option to the root instance, the store will be injected i
 
 ----
 
-## A more practical use
+## A more practical setup
 
 The component
 
@@ -343,10 +422,10 @@ const app = {
     },
     methods: {
         increment () {
-            this.$store.commit('increment')
+            this.$store.dispath('increment')
         },
-        decrement () {
-            this.$store.commit('decrement')
+        incrementBy (n) {
+            this.$store.dispath('incrementBy', n)
         }
     }
 })
@@ -354,32 +433,25 @@ const app = {
 
 ----
 
-## Commit object
+## Dispatch Multiple arguments
 
 If you want to pass multiple arguments
 
 ```js
 methods: {
     addProduct (product, price) {
-        this.$store.commit('increment', { product, price } )
+        this.$store.dispatch('addProduct', {
+            product,
+            price
+        })
     },
 }
+
 ```
-
-Alternative you can write
-
 ```js
 // or
 addProduct (product, price) {
-    this.$store.commit('addProduct', {
-        product,
-        price
-    })
-},
-
-// or
-addProduct (product, price) {
-    this.$store.commit({
+    this.$store.dispatch({
         type: 'addProduct',
         product,
         price
@@ -422,6 +494,22 @@ const store = new Vuex.Store({
 })
 ```
 
+Be aware of the vuejs reactivity!
+
+```js
+mutations: {
+    setCustomerActive: (state, payload) => {
+        // this doesn't work, vuejs doesn't pick up the change
+        state.customers.items[payload.id].active = true
+        // fix
+        state.customers.items.splice(payload.id, 1, {
+            ...state.customers.items[payload.id],
+            active: true
+        })`
+    }
+}
+```
+
 ----
 
 ## Getters
@@ -450,21 +538,47 @@ const store = new Vuex.Store({
         doneTodos: state => {
             return state.todos.filter(todo => todo.done)
         }
+        otherGetter: (state, getters, rootState) => {
+            return ...
+        }
     }
 })
 
-// access via
+// access via (mark that this is a propery!)
 // this.$store.getters.doneTodos
 
 ```
 
-> In Redux (flux) this calls a 'selector' function.
+----
+
+## Getters - With Arguments
+
+Arguments on getters is not directly supported by vuex. But with a workaround we can handle it.
+
+```js
+const store = new Vuex.Store({
+    state: {
+        todos: [
+            { id: 1, text: 'Writing code', done: true },
+            { id: 2, text: 'Go shopping', done: false }
+        ]
+    },
+    getters: {
+        doneTodos: state => filter => {
+            return state.todos.filter(todo => todo.text.includes(filter))
+        }
+    }
+})
+
+// access via
+// this.$store.getters.doneTodos('writing code')
+```
 
 ----
 
 ## Actions
 
-Actions can perform one or more commits. <br> And can be asynchronous!
+Actions can be asynchronous!
 
 ```js
 const store = new Vuex.Store({
@@ -486,7 +600,9 @@ const store = new Vuex.Store({
 ```
 ```js
     actions: {
-        getCustomer ({ commit, getters, state }) {
+        getCustomer ({ commit, getters, state, rootState, dispatch }) {
+            // you have access here to: getters, state & rootState
+            // you can commit a mutation or dispatch another action
             commit('getCustomerRequest')
             return service.getCustomers()
                 .then(result => {
@@ -517,8 +633,6 @@ this.$store.dispatch('getCustomer')
     })
 ```
 
-`Dispatch` can take a payload like `commit` does.
-
 ----
 
 ## Form handling
@@ -543,7 +657,7 @@ computed: {
 },
 methods: {
     updateMessage (e) {
-        this.$store.commit('updateMessage', e.target.value)
+        this.$store.dispatch('updateMessage', e.target.value)
     }
 }
 ```
@@ -553,6 +667,22 @@ methods: {
 ## Vuex Helpers
 
 > To make writing vuex app's easier
+
+----
+
+## $state.commit
+
+You can bypass the actions and commit the mutations directly from the component.
+
+```js
+methods: {
+    updateMessage (e) {
+        this.$store.commit('updateMessage', e.target.value)
+    }
+}
+```
+
+> Not async behavior here.
 
 ----
 
@@ -632,6 +762,7 @@ export default {
 ## The mapMutations helper
 
 ```js
+// access the $state directly
 methods: {
     increment () {
         this.$store.commit('increment')
@@ -639,20 +770,21 @@ methods: {
 }
 ```
 
-vs
-
 ```js
+// map the mutations on the component
 import { mapMutations } from 'vuex'
-
 export default {
     // ...
     methods: {
-        ...mapMutations({
-            // map this.inc() to this.$store.commit('increment')
-            inc: 'increment'
-        }),
+        ...mapMutations([
+            'increment'
+        ]),
     }
 }
+```
+```js
+// use
+this.increment()
 ```
 
 ## The mapActions helper
@@ -662,16 +794,14 @@ import { mapActions } from 'vuex'
 
 export default {
     // ...
-    ...mapActions({
-        // map this.add() to this.$store.dispatch('increment')
-        add: 'increment'
-    })
-
-    // alternative style (without alias)
     ...mapActions([
         'increment'
     ])
 }
+```
+```js
+// use
+this.increment()
 ```
 
 ----
@@ -805,6 +935,8 @@ const store = new Vuex.Store({
 3th party plugins
 
 - [vuex-persistedstate](https://www.npmjs.com/package/vuex-persistedstate)
+- [vuex-router-sync](https://github.com/vuejs/vuex-router-sync)
+- [vuex-scroll](https://www.npmjs.com/package/vuex-scroll)
 - ...
 
 > You can write your own plugins

@@ -1,0 +1,52 @@
+{
+  "name": "webpack-template",
+  "version": "1.0.0",
+  "description": "WebPack Template",
+  "scripts": {
+    "start": "nodemon server/server.js",
+    "serve": "webpack-dev-server --open --inline --hot",
+    "build": "cross-env NODE_ENV=production webpack",
+    "lint": "eslint 'app/**/*.{js,vue}'"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "Faker": "^0.7.2",
+    "axios": "^0.15.3",
+    "body-parser": "^1.16.0",
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "underscore": "^1.8.3",
+    "vue": "^2.1.10",
+    "vue-router": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "cross-env": "^3.1.4",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.14.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-config-vue": "^2.0.2",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-vue": "^1.0.0",
+    "extract-text-webpack-plugin": "^2.0.0-beta",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.4",
+    "json-loader": "^0.5.4",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "vue-loader": "^10.0.2",
+    "vue-style-loader": "^1.0.0",
+    "vue-template-compiler": "^2.1.10",
+    "webpack": "2.2.0",
+    "webpack-dashboard": "^0.2.1",
+    "webpack-dev-server": "2.2.0",
+    "webpack-merge": "^2.4.0"
+  }
+}
