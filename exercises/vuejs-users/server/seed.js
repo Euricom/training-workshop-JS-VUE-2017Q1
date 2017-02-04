@@ -16,6 +16,7 @@ module.exports = {
       }
       const lastName = faker.Name.lastName()
       users.push({
+        id: new Date().valueOf(),
         firstName,
         lastName,
         age: faker.Helpers.randomNumber(100),

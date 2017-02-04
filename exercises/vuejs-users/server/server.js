@@ -22,8 +22,8 @@ let users = [
   { id: 1, firstName: 'john', latName: 'bar', email: 'john.bar@noreply.com' },
   { id: 2, firstName: 'jane', latName: 'zoe', email: 'jane.zoer@noreply.com' },
 ]
-users = seed.generateUsers(50)
-// console.log(users)
+const numberOfUsersToCreate = 10
+users = seed.generateUsers(numberOfUsersToCreate)
 
 //
 // routes
@@ -34,7 +34,7 @@ users = seed.generateUsers(50)
 app.get('/api/users', (req, res) => {
   console.log(req.query.page, req.query.pageSize)
   const page = req.query.page || 0
-  const pageSize = req.query.pageSize || 10
+  const pageSize = req.query.pageSize || 50
 
   const userSet = _.chain(users).rest(page * pageSize).first(pageSize).value()
   // return all resource
@@ -68,6 +68,7 @@ app.get('/api/users/:id', (req, res) => {
 app.post('/api/users', (req, res) => {
   // Get resource
   const resource = req.body
+  console.log('post', req.body)
 
   // Assign number
   resource.id = new Date().valueOf()
@@ -91,6 +92,7 @@ app.post('/api/users', (req, res) => {
 app.put('/api/users/:id', (req, res) => {
   // Get resource
   const resource = req.body
+  console.log('put', req.body)
 
   // Find and update
   const user = _.findWhere(users, { id: Number(req.params.id) })
@@ -98,8 +100,12 @@ app.put('/api/users/:id', (req, res) => {
     return res.send(404, 'not found')
   }
 
-  user.task = resource.name
-  user.state = resource.role
+  user.firstName = resource.firstName
+  user.firstName = resource.lastName
+  user.email = resource.email
+  user.age = Number(resource.age)
+  user.company = resource.company
+
   return res.status(200).send(user)
 })
 
