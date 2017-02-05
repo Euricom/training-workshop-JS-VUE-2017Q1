@@ -1,15 +1,15 @@
 <template>
   <div id="app" class="container">
-    <h1>{{title}}</h1>
-    <hr>
+    <nav-bar></nav-bar>
     <router-view></router-view>
   </div>
 </template>
-
 <script>
+import NavBar from './components/navBar.vue'
 
 export default {
   components: {
+    NavBar,
   },
   data: () => ({
     title: 'User App',
@@ -23,6 +23,6 @@ export default {
 <style lang="less">
   @import "~bootstrap/dist/css/bootstrap.css";
 
-  // add here your custom styling
+  /* add global styling here */
 </style>
 

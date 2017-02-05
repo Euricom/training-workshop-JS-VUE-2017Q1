@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Panel View</h3>
+    <h3>Users</h3>
     <div class="flex-grid">
       <div class="col" v-for="user of users">
         <div class="panel panel-default">
@@ -38,10 +38,22 @@
 </template>
 
 <script>
+import { getUsers } from '../services/userApi'
+
 export default {
-  props: [
-    'users',
-  ],
+  components: {
+  },
+  data: () => ({
+    users: [],
+  }),
+  created() {
+    getUsers()
+      .then((users) => {
+        this.users = users
+      })
+  },
+  methods: {
+  },
 }
 </script>
 
@@ -55,3 +67,4 @@ export default {
   width: 32%;
 }
 </style>
+

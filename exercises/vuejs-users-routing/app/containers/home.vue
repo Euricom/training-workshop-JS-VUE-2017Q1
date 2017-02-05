@@ -1,27 +1,38 @@
 <template>
   <div>
-    <h3>Home</h3>
-    <button class="btn btn-primary" @click="panelView = !panelView">Switch View</button>
-    <button class="btn btn-defaut" @click="$router.push('edit')">Add</button>
-    <hr>
-    <user-list v-if="!panelView" :users="users" @user-delete="onUserDelete"></user-list>
-    <user-panel-list v-else :users="users"></user-panel-list>
+    <h3>User List</h3>
+    <button class="btn btn-defaut" @click="$router.push('edit')">Add User</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>First</th>
+          <th>Last</th>
+          <th>Email</th>
+          <th>Age</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user of users">
+          <td>{{user.firstName}}</td>
+          <td><a @click="onEdit(user)">{{user.lastName}}</a></td>
+          <td>{{user.email}}</td>
+          <td>{{user.age}}</td>
+          <td><a @click="onDelete(user)">delete</a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
 import { getUsers, deleteUser } from '../services/userApi'
-import UserList from '../components/userList.vue'
-import UserPanelList from '../components/userPanelList.vue'
 
 export default {
   components: {
-    UserList,
-    UserPanelList,
   },
   data: () => ({
     users: [],
-    panelView: false,
   }),
   created() {
     console.log('created')
@@ -31,7 +42,16 @@ export default {
       })
   },
   methods: {
-    onUserDelete(user) {
+    onEdit(user) {
+      console.log('onedit', user)
+      this.$router.push({
+        name: 'edit',
+        params: {
+          id: user.id,
+        },
+      })
+    },
+    onDelete(user) {
       console.log('del', user)
       deleteUser(user)
         .then((deletedUser) => {

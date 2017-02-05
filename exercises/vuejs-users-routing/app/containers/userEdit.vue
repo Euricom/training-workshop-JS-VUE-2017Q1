@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Edit</h3>
+    <h3>{{user.id ? 'Edit' : 'Add'}}</h3>
     <form @submit.prevent="addUser">
       <div class="form-group">
         <label for="firstName">First Name:</label>
@@ -18,6 +18,7 @@
         <label for="age">Age:</label>
         <input type="number" class="form-control" id="age" v-model="user.age">
       </div>
+      <button class="btn btn-defaut" @click.prevent="$router.go(-1)">Back</button>
       <button type="submit" class="btn btn-default">Submit</button>
     </form>
   </div>
