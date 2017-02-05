@@ -616,9 +616,8 @@ settings.json
 - Use bootstrap for styling
 - Show image, fullname, email and age in table format.
 - Optional
-    - Make the headers clickable to sort rows
     - Make an alternative view to show users in panels (and switch between the views)
-    - Click on a users name and show all details (left or bottom)
+    - Make the headers clickable to sort rows
 
 ---
 

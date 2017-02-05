@@ -135,8 +135,11 @@ And we are ready: verify
 
 ```html
 <p>
+    <!-- Standard link -->
+    <a href="/foo">Go to Foo</a>
+    <!-- router link  -->
     <router-link to="/foo">Go to Foo</router-link>
-    <router-link to="/bar">Go to Bar</router-link>
+    <router-link :to="{ name: 'bar'}">Go to Bar</router-link>
 </p>
 ```
 
@@ -279,6 +282,18 @@ router.beforeEach((to, from, next) => {
 
 ```
 
+----
+
+## Exercise
+
+> Refactor 'vuejs-users' example and add routing
+
+- Add NavBar Menu: home (table view), users (panel view), about
+- Add User Edit page (to add and edit user)
+- Optional:
+    + Delete a user
+    + Show total number of user in menu item (ex: 'user [12]')
+
 ---
 
 # VUEX
@@ -322,6 +337,7 @@ Provide an initial state object, some mutations and actions:
 
 ```js
 const store = new Vuex.Store({
+    strict: true,  /* extra debug warnings */
     state: {
         count: 0
     },
@@ -380,7 +396,7 @@ The store
 
 ```js
 // store.js
-const store = new Vuex.Store({
+export default new Vuex.Store({
     state: {
         count: 0
     },
@@ -422,10 +438,10 @@ const app = {
     },
     methods: {
         increment () {
-            this.$store.dispath('increment')
+            this.$store.dispatch('increment')
         },
         incrementBy (n) {
-            this.$store.dispath('incrementBy', n)
+            this.$store.dispatch('incrementBy', n)
         }
     }
 })
@@ -505,7 +521,7 @@ mutations: {
         state.customers.items.splice(payload.id, 1, {
             ...state.customers.items[payload.id],
             active: true
-        })`
+        })
     }
 }
 ```
@@ -827,6 +843,8 @@ export default {
     },
 }
 ```
+
+The spread operator has problems with vscode/eslint in .vue files!
 
 ----
 
