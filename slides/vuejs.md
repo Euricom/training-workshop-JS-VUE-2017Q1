@@ -695,6 +695,27 @@ More: https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram
 For form validation see: https://github.com/logaretm/vee-validate
 </small>
 
+----
+
+## Form Submit
+
+Form with bootstrap styling
+
+```html
+<form @submit.prevent="addUser">
+  <div class="form-group">
+    <label for="firstName">First Name:</label>
+    <input type="text" class="form-control"
+           id="firstName" v-model="user.firstName">
+  </div>
+
+  ... other
+
+  <button class="btn btn-defaut" @click.prevent="$router.go(-1)">Back</button>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+```
+
 ---
 
 ## App Events
