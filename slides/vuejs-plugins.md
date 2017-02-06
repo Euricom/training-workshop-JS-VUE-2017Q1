@@ -286,13 +286,14 @@ router.beforeEach((to, from, next) => {
 
 ## Exercise
 
-> Refactor 'vuejs-users' example and add routing
+> Refactor 'exercise/vuejs-users' example and add routing
 
 - Add NavBar Menu: home (table view), users (panel view), about
 - Add User Edit page (to add and edit user)
 - Optional:
     + Delete a user
     + Show total number of user in menu item (ex: 'user [12]')
+    + Show an alert (just below NavBar) if a communication failure occures.
 
 ---
 
@@ -561,7 +562,7 @@ const store = new Vuex.Store({
 })
 
 // access via (mark that this is a propery!)
-// this.$store.getters.doneTodos
+this.$store.getters.doneTodos
 
 ```
 
@@ -587,7 +588,7 @@ const store = new Vuex.Store({
 })
 
 // access via
-// this.$store.getters.doneTodos('writing code')
+this.$store.getters.doneTodos('writing code')
 ```
 
 ----
@@ -680,6 +681,67 @@ methods: {
 
 ----
 
+## Form handling
+
+Alternative way to handle forms
+
+```js
+computed: {
+    customer() {
+        // return a copy of the customer
+        return {
+            ...this.$store.customer;
+        }
+    }
+},
+methods: {
+    updateMessage (e) {
+        this.$store.dispatch('saveCustomer', this.customer)
+    }
+}
+```
+
+----
+
+## Vuex Plugins
+
+> Want to extend vuex
+
+----
+
+## Build in plugins
+
+Vuex comes with a logger plugin for common debugging usage:
+
+```js
+import createLogger from 'vuex/dist/logger'
+
+const store = new Vuex.Store({
+    ...
+    plugins: [createLogger()]
+})
+```
+
+3th party plugins
+
+- [vuex-persistedstate](https://www.npmjs.com/package/vuex-persistedstate)
+- [vuex-router-sync](https://github.com/vuejs/vuex-router-sync)
+- [vuex-scroll](https://www.npmjs.com/package/vuex-scroll)
+- ...
+
+> You can write your own plugins
+
+----
+
+## Exercise
+> Refactor 'exercise/vuejs-user-routing' to work with vuex.
+
+- Create store with global state and mutations
+- Place your route in the store
+- Add async actions
+
+----
+
 ## Vuex Helpers
 
 > To make writing vuex app's easier
@@ -698,7 +760,7 @@ methods: {
 }
 ```
 
-> Not async behavior here.
+> No async behavior here!
 
 ----
 
@@ -803,6 +865,8 @@ export default {
 this.increment()
 ```
 
+----
+
 ## The mapActions helper
 
 ```js
@@ -845,6 +909,12 @@ export default {
 ```
 
 The spread operator has problems with vscode/eslint in .vue files!
+
+----
+
+## Exercise
+
+> Add vuex helpers to you vuex app
 
 ----
 
@@ -930,34 +1000,6 @@ store.state.user // -> moduleB's state
          ├── cart.js        # cart module
          ├── products.js    # products module
 ```
-
-## Vuex Plugins
-
-> Want to extend vuex
-
-----
-
-## Build in plugins
-
-Vuex comes with a logger plugin for common debugging usage:
-
-```js
-import createLogger from 'vuex/dist/logger'
-
-const store = new Vuex.Store({
-    ...
-    plugins: [createLogger()]
-})
-```
-
-3th party plugins
-
-- [vuex-persistedstate](https://www.npmjs.com/package/vuex-persistedstate)
-- [vuex-router-sync](https://github.com/vuejs/vuex-router-sync)
-- [vuex-scroll](https://www.npmjs.com/package/vuex-scroll)
-- ...
-
-> You can write your own plugins
 
 ---
 
