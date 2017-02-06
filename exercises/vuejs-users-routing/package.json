@@ -19,7 +19,8 @@
     "morgan": "^1.7.0",
     "underscore": "^1.8.3",
     "vue": "^2.1.10",
-    "vue-router": "^2.2.0"
+    "vue-router": "^2.2.0",
+    "vue-toast": "^3.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

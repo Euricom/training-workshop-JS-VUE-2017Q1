@@ -26,10 +26,9 @@
 
 <script>
 import { getUser, saveUser } from '../services/userApi'
+import { noop } from '../core/utils'
 
 export default {
-  props: [
-  ],
   data: () => ({
     user: {},
   }),
@@ -40,6 +39,7 @@ export default {
         .then((user) => {
           this.user = user
         })
+        .catch(noop)
     }
   },
   methods: {
@@ -49,6 +49,7 @@ export default {
         .then(() => {
           this.$router.go(-1)
         })
+        .catch(noop)
     },
   },
 }

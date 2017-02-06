@@ -39,10 +39,9 @@
 
 <script>
 import { getUsers } from '../services/userApi'
+import { noop } from '../core/utils'
 
 export default {
-  components: {
-  },
   data: () => ({
     users: [],
   }),
@@ -51,6 +50,7 @@ export default {
       .then((users) => {
         this.users = users
       })
+      .catch(noop)
   },
   methods: {
   },

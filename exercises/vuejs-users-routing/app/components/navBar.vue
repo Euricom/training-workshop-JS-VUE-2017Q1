@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li><router-link :to="{ name: 'home'}">Home</router-link></li>
-    <li><router-link :to="{ name: 'users'}">Users [{{userCount}}]</router-link></li>
+    <li><router-link :to="{ name: 'users'}">Users</router-link></li>
     <li><router-link :to="{ name: 'about'}">About</router-link></li>
   </ul>
 </template>

@@ -27,23 +27,21 @@
 
 <script>
 import { getUsers, deleteUser } from '../services/userApi'
+import { noop } from '../core/utils'
 
 export default {
-  components: {
-  },
   data: () => ({
     users: [],
   }),
   created() {
-    console.log('created')
     getUsers()
       .then((users) => {
         this.users = users
       })
+      .catch(noop)
   },
   methods: {
     onEdit(user) {
-      console.log('onedit', user)
       this.$router.push({
         name: 'edit',
         params: {
@@ -52,12 +50,12 @@ export default {
       })
     },
     onDelete(user) {
-      console.log('del', user)
       deleteUser(user)
         .then((deletedUser) => {
           console.log('user deleted', deletedUser)
           this.users = this.users.filter(item => item !== user)
         })
+        .catch(noop)
     },
   },
 }

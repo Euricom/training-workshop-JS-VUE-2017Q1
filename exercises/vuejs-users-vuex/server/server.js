@@ -101,7 +101,7 @@ app.put('/api/users/:id', (req, res) => {
   }
 
   user.firstName = resource.firstName
-  user.firstName = resource.lastName
+  user.lastName = resource.lastName
   user.email = resource.email
   user.age = Number(resource.age)
   user.company = resource.company
