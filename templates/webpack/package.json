@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "WebPack Template",
   "scripts": {
+    "cleanup": "rm -rf app/bundle && rm -rf dist", 
     "serve": "rm -rf app/bundle && webpack-dev-server --open --inline --hot",
     "serve:prod": "live-server ./dist",
     "build:prod": "rm -rf dist && cross-env NODE_ENV=production webpack",
