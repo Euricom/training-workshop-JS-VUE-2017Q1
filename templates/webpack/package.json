@@ -4,7 +4,8 @@
   "description": "WebPack Template",
   "scripts": {
     "serve": "webpack-dev-server --open --inline --hot",
-    "build": "cross-env NODE_ENV=production webpack"
+    "build:prod": "cross-env NODE_ENV=production webpack",
+    "build": "cross-env NODE_ENV=development webpack"
   },
   "author": "",
   "license": "MIT",
@@ -25,6 +26,7 @@
     "eslint-plugin-import": "^2.2.0",
     "extract-text-webpack-plugin": "^2.0.0-beta",
     "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.28.0",
     "json-loader": "^0.5.4",
     "node-sass": "^4.3.0",
     "style-loader": "^0.13.1",

@@ -1,12 +1,20 @@
+/* eslint-disable */
+const path = require('path')
 const webpack = require('webpack')
 var merge = require('webpack-merge')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
-
 const webpackBase = require('./base.config')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(webpackBase, {
   // production ready source maps
+  // remove this line if your don't want source maps
   devtool: 'sourcemap',
+
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: '/',
+  },
 
   module: {
     rules: [
@@ -37,5 +45,8 @@ module.exports = merge(webpackBase, {
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
+
+    // generate html file
+    new HtmlWebpackPlugin(),
   ],
 })
