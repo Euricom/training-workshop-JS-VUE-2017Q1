@@ -34,7 +34,7 @@ users = seed.generateUsers(numberOfUsersToCreate)
 app.get('/api/users', (req, res) => {
   console.log(req.query.page, req.query.pageSize)
   const page = req.query.page || 0
-  const pageSize = req.query.pageSize || 50
+  const pageSize = req.query.pageSize || 10
 
   const userSet = _.chain(users).rest(page * pageSize).first(pageSize).value()
   // return all resource
@@ -101,7 +101,7 @@ app.put('/api/users/:id', (req, res) => {
   }
 
   user.firstName = resource.firstName
-  user.firstName = resource.lastName
+  user.lastName = resource.lastName
   user.email = resource.email
   user.age = Number(resource.age)
   user.company = resource.company
