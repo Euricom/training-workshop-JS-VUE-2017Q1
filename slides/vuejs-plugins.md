@@ -607,11 +607,11 @@ const store = new Vuex.Store({
     },
     mutations: {
         getCustomerRequest (state) {
-            state.loading = true;
+            state.customers.loading = true
         },
         getCustomerResult (state, playload) {
-            state.items = playload.result;
-            state.loading = false;
+            state.customers.items = playload
+            state.customers.loading = false
         }
     },
 ```
