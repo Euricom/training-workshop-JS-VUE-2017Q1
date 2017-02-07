@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "WebPack Template",
   "scripts": {
-    "serve": "webpack-dev-server --open --inline --hot",
-    "build:prod": "cross-env NODE_ENV=production webpack",
+    "serve": "rm -rf app/bundle && webpack-dev-server --open --inline --hot",
+    "serve:prod": "live-server ./dist",
+    "build:prod": "rm -rf dist && cross-env NODE_ENV=production webpack",
     "build": "cross-env NODE_ENV=development webpack"
   },
   "author": "",

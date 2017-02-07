@@ -1,6 +1,4 @@
 var merge = require('webpack-merge')
-var DashboardPlugin = require('webpack-dashboard/plugin')
-
 const webpackBase = require('./base.config')
 
 module.exports = merge(webpackBase, {
@@ -19,8 +17,6 @@ module.exports = merge(webpackBase, {
   },
 
   plugins: [
-    // support or webpack dashboard
-    new DashboardPlugin(),
   ],
 
   devServer: {

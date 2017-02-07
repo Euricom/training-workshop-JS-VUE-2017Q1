@@ -12,6 +12,7 @@ module.exports = merge(webpackBase, {
   devtool: 'sourcemap',
 
   output: {
+    filename: 'bundle.[hash].js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
   },
@@ -22,8 +23,8 @@ module.exports = merge(webpackBase, {
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader',
+          fallback: 'style-loader',
+          use: 'css-loader',
         }),
       },
     ],
@@ -31,7 +32,7 @@ module.exports = merge(webpackBase, {
 
   plugins: [
     // extract css to file
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin('styles.[hash].css'),
 
     // uglify JS (obscure & minimize)
     new webpack.optimize.UglifyJsPlugin({
@@ -47,6 +48,8 @@ module.exports = merge(webpackBase, {
     }),
 
     // generate html file
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: './app/index.templ.html'
+    }),
   ],
 })
