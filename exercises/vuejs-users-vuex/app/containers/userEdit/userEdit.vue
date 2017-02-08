@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>{{user.id ? 'Edit' : 'Add'}}</h3>
-    <form @submit.prevent="addUser">
+    <form @submit.prevent="onAddUser">
       <div class="form-group">
         <label for="firstName">First Name:</label>
         <input type="text" class="form-control" id="firstName" v-model="user.firstName">
@@ -24,4 +24,4 @@
   </div>
 </template>
 
-<script src="./userEdit.js" />
+<script src="./userEdit.alt.js" />

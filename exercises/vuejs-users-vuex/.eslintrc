@@ -5,9 +5,11 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "mocha": true
   },
   "rules": {
+    "import/no-extraneous-dependencies": [0],
     "no-param-reassign": [0],
     "arrow-body-style": [0],
     "no-console": [0, ""],  // allow console.log

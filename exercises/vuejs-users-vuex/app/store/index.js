@@ -8,7 +8,7 @@ import mutations from './mutations'
 
 Vue.use(Vuex)
 
-const state = {
+const defaultState = {
   users: {
     items: [],
     pending: false,
@@ -16,12 +16,20 @@ const state = {
   },
 }
 
+const getters = {
+  getUser(state) {
+    const userId = state.route.params.id
+    return state.users.items.find(item => item.id === userId)
+  },
+}
+
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   plugins: [createLogger()],
-  state,
+  state: defaultState,
   mutations,
   actions,
+  getters,
 })
 
 export default store

@@ -19,6 +19,7 @@ export default {
     return getUsers()
       .then((users) => {
         commit('getUsers_success', { users })
+        return users
       })
       .catch((error) => {
         commit('getUsers_error', { error })
